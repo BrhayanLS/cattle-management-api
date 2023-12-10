@@ -19,4 +19,20 @@ public class OwnerService {
     public List<OwnerEntity> getAll() {
         return this.ownerRepository.findAll();
     }
+
+    public OwnerEntity getById(int idOwner){
+        return this.ownerRepository.findById(idOwner).orElse(null);
+    }
+
+    public OwnerEntity saveOwner(OwnerEntity owner){
+        return this.ownerRepository.save(owner);
+    }
+
+    public Boolean exists(int idOwner){
+        return this.ownerRepository.existsById(idOwner);
+    }
+
+    public void deleteOwner(int idOwner){
+        this.ownerRepository.deleteById(idOwner);
+    }
 }

@@ -20,7 +20,7 @@ public class OwnerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_owner", nullable = false)
-    private int idOwner;
+    private Integer idOwner;
 
     @Column(nullable = false, length = 50)
     private String nombre;

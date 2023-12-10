@@ -20,7 +20,7 @@ public class CattleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cattle", nullable = false)
-    private int idCattle;
+    private Integer idCattle;
 
     @Column(nullable = false, length = 50)
     private String nombre;
@@ -35,7 +35,7 @@ public class CattleEntity {
     private LocalDateTime fechaNacimiento;
 
     @Column(name = "id_owner", nullable = false)
-    private int idOwner;
+    private Integer idOwner;
 
     @Column(nullable = false, columnDefinition = "TINYINT")
     private Boolean estado;

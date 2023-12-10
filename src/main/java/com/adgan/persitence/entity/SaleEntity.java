@@ -20,34 +20,34 @@ public class SaleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_sale", nullable = false)
-    private int idSale;
+    private Integer idSale;
 
     @Column(name = "id_owner", nullable = false)
-    private int idOwner;
+    private Integer idOwner;
 
     @Column(name = "id_cattle", nullable = false, unique = true)
-    private int idCattle;
+    private Integer idCattle;
 
     @Column(name = "fecha_venta", nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime fechaVenta;
 
     @Column(nullable = false)
-    private double peso;
+    private Double peso;
 
     @Column(name = "precio_kilo", nullable = false)
-    private int precioKilo;
+    private Integer precioKilo;
 
     @Column(name = "valor_camion", nullable = false)
-    private int valorCamion;
+    private Integer valorCamion;
 
     @Column(name = "valor_bascula", nullable = false)
-    private int valorBascula;
+    private Integer valorBascula;
 
     @Column(name = "total_neto", nullable = false)
-    private double totalNeto;
+    private Double totalNeto;
 
     @Column(nullable = false)
-    private double total;
+    private Double total;
 
     @ManyToOne
     @JoinColumn(name = "id_owner", referencedColumnName = "id_owner", insertable = false, updatable = false)

@@ -23,7 +23,8 @@ public class OwnerController {
     public ResponseEntity<List<OwnerEntity>> getAll() {
         return ResponseEntity.ok(this.ownerService.getAll());
     }
-@GetMapping("/{idOwner}")
+
+    @GetMapping("/{idOwner}")
     public ResponseEntity<OwnerEntity> getOwnerById(@PathVariable int idOwner) {
         return ResponseEntity.ok(this.ownerService.getById(idOwner));
     }

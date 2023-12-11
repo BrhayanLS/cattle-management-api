@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -28,8 +29,8 @@ public class SaleEntity {
     @Column(name = "id_cattle", nullable = false, unique = true)
     private Integer idCattle;
 
-    @Column(name = "fecha_venta", nullable = false, columnDefinition = "DATETIME")
-    private LocalDateTime fechaVenta;
+    @Column(name = "fecha_venta", nullable = false, columnDefinition = "DATE")
+    private LocalDate fechaVenta;
 
     @Column(nullable = false)
     private Double peso;

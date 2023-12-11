@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "cattle")
@@ -31,8 +30,8 @@ public class CattleEntity {
     @Column(nullable = false, length = 50)
     private String padre;*/
 
-    @Column(name = "fecha_nacimiento", nullable = false, columnDefinition = "DATETIME")
-    private LocalDateTime fechaNacimiento;
+    @Column(name = "fecha_nacimiento", nullable = false, columnDefinition = "DATE")
+    private LocalDate fechaNacimiento;
 
     @Column(name = "id_owner", nullable = false)
     private Integer idOwner;

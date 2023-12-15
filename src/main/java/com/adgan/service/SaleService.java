@@ -28,6 +28,7 @@ public class SaleService {
     public SaleEntity saveSale (SaleEntity sale) {
         sale.setTotalNeto(sale.getPeso() * sale.getPrecioKilo());
         sale.setTotal(sale.getTotalNeto() - (sale.getValorBascula() + sale.getValorCamion()));
+        this.saleRepository.updateEstado(sale.getIdCattle());
         return this.saleRepository.save(sale);
     }
 

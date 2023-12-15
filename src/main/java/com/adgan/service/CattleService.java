@@ -17,6 +17,7 @@ public class CattleService {
     }
 
     public CattleEntity saveCattle (CattleEntity cattle){
+        cattle.setEstado(true);
         return this.cattleRepository.save(cattle);
     }
 

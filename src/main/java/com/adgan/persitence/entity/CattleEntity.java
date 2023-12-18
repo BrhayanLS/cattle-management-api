@@ -1,10 +1,7 @@
 package com.adgan.persitence.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -42,4 +39,11 @@ public class CattleEntity {
     @ManyToOne
     @JoinColumn(name = "id_owner", referencedColumnName = "id_owner", insertable = false, updatable = false)
     private OwnerEntity owner;
+
+    @Override
+    public String toString() {
+        return "CattleEntity{" +
+                "idCattle=" + idCattle +
+                '}';
+    }
 }

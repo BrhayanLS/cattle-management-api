@@ -41,7 +41,7 @@ public class OwnerEntity {
     @JsonIgnore
     private List<CattleEntity> cattle;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    /*@OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<SaleEntity> sale;
+    private List<SaleEntity> sale;*/
 }

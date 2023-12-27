@@ -23,8 +23,45 @@ public class SaleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_sale", nullable = false)
+    @Column(name = "id_sale"/*, nullable = false*/)
     private Integer idSale;
+
+    @Column(name = "fecha_venta", /*nullable = false,*/ columnDefinition = "DATE")
+    private LocalDate fechaVenta;
+
+    @Column(name = "precio_kilo"/*, nullable = false*/)
+    private Integer precioKilo;
+
+    @Column(name = "valor_camion"/*, nullable = false*/)
+    private Integer valorCamion;
+
+    @Column(name = "valor_bascula"/*, nullable = false*/)
+    private Integer valorBascula;
+
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
+    private List<SaleCattleEntity> saleCattles = new ArrayList<>();
+
+    public void addSaleCattle(SaleCattleEntity saleCattle) {
+        saleCattles.add(saleCattle);
+        saleCattle.setSale(this);
+    }
+
+    public SaleEntity(LocalDate fechaVenta, Integer precioKilo, Integer valorCamion, Integer valorBascula) {
+        this.fechaVenta = fechaVenta;
+        this.precioKilo = precioKilo;
+        this.valorCamion = valorCamion;
+        this.valorBascula = valorBascula;
+    }
+
+    /*
+    @Column(name = "total_neto", nullable = false)
+    private Double totalNeto;
+
+    @Column(nullable = false)
+    private Double total;*/
+
+    /*@Column(nullable = false)
+    private Double peso;*/
 
     /*@Column(name = "id_owner", nullable = false)
     private Integer idOwner;
@@ -32,45 +69,28 @@ public class SaleEntity {
     @Column(name = "id_cattle", nullable = false, unique = true)
     private Integer idCattle;*/
 
-    @Column(name = "fecha_venta", nullable = false, columnDefinition = "DATE")
-    private LocalDate fechaVenta;
-
-    /*@Column(nullable = false)
-    private Double peso;*/
-
-    @Column(name = "precio_kilo", nullable = false)
-    private Integer precioKilo;
-
-    @Column(name = "valor_camion", nullable = false)
-    private Integer valorCamion;
-
-    @Column(name = "valor_bascula", nullable = false)
-    private Integer valorBascula;
-
-    /*@Column(name = "total_neto", nullable = false)
-    private Double totalNeto;
-
-    @Column(nullable = false)
-    private Double total;*/
-
-    @OneToMany(mappedBy = "sale", fetch = FetchType.LAZY)
-    private List<SaleCattleEntity> saleCattle = new ArrayList<>();
-
-    public void addSaleCattle(SaleCattleEntity saleCattle) {
-        this.saleCattle.add(saleCattle);
-        saleCattle.setSale(this);
-    }
-
-    public void removeSaleItem(SaleCattleEntity saleCattle) {
+    /*public void removeSaleItem(SaleCattleEntity saleCattle) {
         this.saleCattle.remove(saleCattle);
         saleCattle.setSale(null);
     }
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "id_owner", referencedColumnName = "id_owner", insertable = false, updatable = false)
     private OwnerEntity owner;
 
     @OneToOne
     @JoinColumn(name = "id_cattle", referencedColumnName = "id_cattle", insertable = false, updatable = false)
     private CattleEntity cattle;*/
+
+    @Override
+    public String toString() {
+        return "SaleEntity{" +
+                "idSale=" + idSale +
+                ", fechaVenta=" + fechaVenta +
+                ", precioKilo=" + precioKilo +
+                ", valorCamion=" + valorCamion +
+                ", valorBascula=" + valorBascula +
+                ", saleCattles=" + saleCattles +
+                '}';
+    }
 }

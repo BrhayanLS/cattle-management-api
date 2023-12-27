@@ -40,6 +40,9 @@ public class CattleEntity {
     @JoinColumn(name = "id_owner", referencedColumnName = "id_owner", insertable = false, updatable = false)
     private OwnerEntity owner;
 
+    @OneToOne(mappedBy = "cattle", cascade = CascadeType.ALL)
+    private SaleCattleEntity saleCattle;
+
     @Override
     public String toString() {
         return "CattleEntity{" +

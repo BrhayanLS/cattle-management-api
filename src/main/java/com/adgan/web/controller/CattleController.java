@@ -1,6 +1,8 @@
 package com.adgan.web.controller;
 
 import com.adgan.persitence.entity.CattleEntity;
+import com.adgan.persitence.projection.CattleResume;
+import com.adgan.persitence.projection.CattleSoldResume;
 import com.adgan.service.CattleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +21,19 @@ public class CattleController {
         this.cattleService = cattleService;
     }
 
-    @GetMapping("/all")
+    /*@GetMapping("/all")
     public ResponseEntity<List<CattleEntity>> getAll(){
         return ResponseEntity.ok(this.cattleService.getAll());
-    }
+    }*/
 
     @GetMapping
-    public ResponseEntity<List<CattleEntity>> getCattles(){
-        return ResponseEntity.ok(this.cattleService.getCattles());
+    public ResponseEntity<List<CattleResume>> getCattleResume(){
+        return ResponseEntity.ok(this.cattleService.getCattleResume());
+    }
+
+    @GetMapping("/sold")
+    public ResponseEntity<List<CattleSoldResume>> getSoldResume(){
+        return ResponseEntity.ok(this.cattleService.getSoldResume());
     }
 
     @GetMapping("/{idCattle}")

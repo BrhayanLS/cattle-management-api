@@ -24,6 +24,10 @@ public class OwnerService {
         return this.ownerRepository.findAll();
     }
 
+    public List<OwnerEntity> getOwners() {
+        return this.ownerRepository.findAllByEstadoIsTrue();
+    }
+
     public OwnerEntity getById(int idOwner){
         return this.ownerRepository.findById(idOwner).orElse(null);
     }

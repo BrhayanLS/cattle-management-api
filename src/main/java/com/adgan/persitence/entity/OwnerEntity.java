@@ -22,6 +22,9 @@ public class OwnerEntity {
     @Column(name = "id_owner", nullable = false)
     private Integer idOwner;
 
+    @Column(nullable = false, columnDefinition = "TINYINT")
+    private Boolean estado;
+
     @Column(nullable = false, length = 50)
     private String nombre;
 

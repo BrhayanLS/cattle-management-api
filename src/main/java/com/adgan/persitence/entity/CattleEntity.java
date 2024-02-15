@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Table(name = "cattle")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class CattleEntity {
@@ -18,6 +17,10 @@ public class CattleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cattle", nullable = false)
     private Integer idCattle;
+
+    @Column(nullable = false, columnDefinition = "TINYINT")
+    private Boolean estado;
+
 
     @Column(nullable = false, length = 50)
     private String nombre;
@@ -33,10 +36,6 @@ public class CattleEntity {
 
     @Column(name = "id_owner", nullable = false)
     private Integer idOwner;
-
-    @Column(nullable = false, columnDefinition = "TINYINT")
-    private Boolean estado;
-
     @ManyToOne
     @JoinColumn(name = "id_owner", referencedColumnName = "id_owner", insertable = false, updatable = false)
     private OwnerEntity owner;
@@ -44,10 +43,11 @@ public class CattleEntity {
     @OneToOne(mappedBy = "cattle", cascade = CascadeType.ALL)
     private SaleCattleEntity saleCattle;
 
-    /*@Override
+    @Override
     public String toString() {
         return "CattleEntity{" +
                 "idCattle=" + idCattle +
+                "nombre=" + nombre +
                 '}';
-    }*/
+    }
 }

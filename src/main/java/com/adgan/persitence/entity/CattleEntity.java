@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Table(name = "cattle")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class CattleEntity {
@@ -43,10 +44,10 @@ public class CattleEntity {
     @OneToOne(mappedBy = "cattle", cascade = CascadeType.ALL)
     private SaleCattleEntity saleCattle;
 
-    @Override
+    /*@Override
     public String toString() {
         return "CattleEntity{" +
                 "idCattle=" + idCattle +
                 '}';
-    }
+    }*/
 }

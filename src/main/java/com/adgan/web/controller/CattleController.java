@@ -19,9 +19,14 @@ public class CattleController {
         this.cattleService = cattleService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<CattleEntity>> getAll(){
         return ResponseEntity.ok(this.cattleService.getAll());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CattleEntity>> getCattles(){
+        return ResponseEntity.ok(this.cattleService.getCattles());
     }
 
     @GetMapping("/{idCattle}")

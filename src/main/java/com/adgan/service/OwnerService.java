@@ -35,6 +35,7 @@ public class OwnerService {
     public OwnerEntity saveOwner(OwnerEntity owner){
         String pass = passwordEncoder.encode(owner.getPassword());
         owner.setPassword(pass);
+        owner.setEstado(true);
         return this.ownerRepository.save(owner);
     }
 
@@ -43,6 +44,6 @@ public class OwnerService {
     }
 
     public void deleteOwner(int idOwner){
-        this.ownerRepository.deleteById(idOwner);
+        this.ownerRepository.updateEstado(idOwner);
     }
 }

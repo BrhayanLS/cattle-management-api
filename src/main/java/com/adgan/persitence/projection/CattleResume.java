@@ -5,4 +5,6 @@ public interface CattleResume {
  String getEdad();
  String getNombre();
  String getOwner();
+ String getEstado();
+ String getContacto();
 }

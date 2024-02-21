@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public interface SaleRepository extends ListCrudRepository<SaleEntity, Integer> {
 
+    @Transactional
     @Modifying
     @Query("UPDATE CattleEntity c SET c.estado = false WHERE c.idCattle = :idCattle")
     void updateEstado(@Param("idCattle") int idCattle);

@@ -1,6 +1,7 @@
 package com.adgan.service;
 
 import com.adgan.persitence.entity.CattleEntity;
+import com.adgan.persitence.projection.AllCattles;
 import com.adgan.persitence.projection.CattleResume;
 import com.adgan.persitence.projection.CattleSoldResume;
 import com.adgan.persitence.repository.CattleRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CattleService {
@@ -23,8 +25,12 @@ public class CattleService {
         return this.cattleRepository.save(cattle);
     }
 
-    public List<CattleEntity> getAll(){
-        return  this.cattleRepository.findAll();
+    public List<AllCattles> getAll(){
+        return  this.cattleRepository.getAllCattles();
+    }
+
+    public List<AllCattles> getCattles(){
+        return  this.cattleRepository.getCattles();
     }
 
     public List<CattleResume> getCattleResume(){
@@ -33,8 +39,10 @@ public class CattleService {
 
     public List<CattleSoldResume> getSoldResume() {return this.cattleRepository.getCattleSoldResume();}
 
-    public CattleEntity getById(int idCattle){
-        return this.cattleRepository.findById(idCattle).orElse(null);
+    public  List<AllCattles> getDeadCattles() { return this.cattleRepository.getDeadCattles();}
+
+    public Optional<AllCattles> getCattleById(int idCattle){
+        return this.cattleRepository.getCattlesById(idCattle);
     }
 
     public Boolean exists(int idCattle) {
@@ -42,6 +50,6 @@ public class CattleService {
     }
 
     public void deleteCattle (int idCattle){
-        this.cattleRepository.deleteById(idCattle);
+        this.cattleRepository.updateEstado(idCattle);
     }
 }

@@ -26,6 +26,9 @@ public class SaleEntity {
     @Column(name = "id_sale"/*, nullable = false*/)
     private Integer idSale;
 
+    @Column(nullable = false, columnDefinition = "TINYINT")
+    private Boolean estado;
+
     @Column(name = "fecha_venta", /*nullable = false,*/ columnDefinition = "DATE")
     private LocalDate fechaVenta;
 
@@ -41,16 +44,14 @@ public class SaleEntity {
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
     private List<SaleCattleEntity> saleCattles = new ArrayList<>();
 
-    public void addSaleCattle(SaleCattleEntity saleCattle) {
-        saleCattles.add(saleCattle);
-        saleCattle.setSale(this);
-    }
-
     public SaleEntity(LocalDate fechaVenta, Integer precioKilo, Integer valorCamion, Integer valorBascula) {
         this.fechaVenta = fechaVenta;
         this.precioKilo = precioKilo;
         this.valorCamion = valorCamion;
         this.valorBascula = valorBascula;
+    }
+
+    public SaleEntity(Integer idSale, Boolean estado, LocalDate fechaVenta, Integer precioKilo, Integer valorCamion, Integer valorBascula) {
     }
 
     /*

@@ -44,44 +44,12 @@ public class SaleEntity {
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
     private List<SaleCattleEntity> saleCattles = new ArrayList<>();
 
-    public SaleEntity(LocalDate fechaVenta, Integer precioKilo, Integer valorCamion, Integer valorBascula) {
-        this.fechaVenta = fechaVenta;
-        this.precioKilo = precioKilo;
-        this.valorCamion = valorCamion;
-        this.valorBascula = valorBascula;
+    public void addSaleCattle(SaleCattleEntity saleCattle) {
+        if (saleCattle != null) {
+            saleCattles.add(saleCattle);
+            saleCattle.setSale(this); // Establecer la relación bidireccional
+        }
     }
-
-    public SaleEntity(Integer idSale, Boolean estado, LocalDate fechaVenta, Integer precioKilo, Integer valorCamion, Integer valorBascula) {
-    }
-
-    /*
-    @Column(name = "total_neto", nullable = false)
-    private Double totalNeto;
-
-    @Column(nullable = false)
-    private Double total;*/
-
-    /*@Column(nullable = false)
-    private Double peso;*/
-
-    /*@Column(name = "id_owner", nullable = false)
-    private Integer idOwner;
-
-    @Column(name = "id_cattle", nullable = false, unique = true)
-    private Integer idCattle;*/
-
-    /*public void removeSaleItem(SaleCattleEntity saleCattle) {
-        this.saleCattle.remove(saleCattle);
-        saleCattle.setSale(null);
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "id_owner", referencedColumnName = "id_owner", insertable = false, updatable = false)
-    private OwnerEntity owner;
-
-    @OneToOne
-    @JoinColumn(name = "id_cattle", referencedColumnName = "id_cattle", insertable = false, updatable = false)
-    private CattleEntity cattle;*/
 
     @Override
     public String toString() {

@@ -43,8 +43,4 @@ public class OwnerEntity {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<CattleEntity> cattle;
-
-    /*@OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<SaleEntity> sale;*/
 }

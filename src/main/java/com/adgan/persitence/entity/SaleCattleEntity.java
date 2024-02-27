@@ -1,5 +1,6 @@
 package com.adgan.persitence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,12 +20,6 @@ public class SaleCattleEntity {
     @Column(name = "id_sale_cattle", nullable = false)
     private Integer idSaleCattle;
 
-    /*@Column(name = "id_sale", nullable = false, insertable = false, updatable = false)
-    private Integer idSale;
-
-    @Column(name = "id_cattle", nullable = false, unique = true, insertable = false, updatable = false)
-    private Integer idCattle;*/
-
     private Double peso;
 
     private Double totalNeto;
@@ -33,18 +28,13 @@ public class SaleCattleEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_sale", referencedColumnName = "id_sale")
+    @JsonIgnore
     private SaleEntity sale;
 
     @OneToOne
     @JoinColumn(name = "id_cattle")
+    @JsonIgnore
     private CattleEntity cattle;
-
-    public SaleCattleEntity(Double peso, Double totalNeto, Double total, CattleEntity cattle) {
-        this.peso = peso;
-        this.totalNeto = totalNeto;
-        this.total = total;
-        this.cattle = cattle;
-    }
 
     @Override
     public String toString() {

@@ -40,7 +40,7 @@ public class CattleEntity {
     @JoinColumn(name = "id_owner", referencedColumnName = "id_owner", insertable = false, updatable = false)
     private OwnerEntity owner;
 
-    @OneToOne(mappedBy = "cattle", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "cattle")
     private SaleCattleEntity saleCattle;
 
     @Override

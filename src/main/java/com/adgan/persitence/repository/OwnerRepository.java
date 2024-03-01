@@ -8,9 +8,12 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OwnerRepository extends ListCrudRepository<OwnerEntity, Integer> {
     List<OwnerEntity> findAllByEstadoIsTrue();
+
+    Optional<OwnerEntity> findByUsername(String username);
 
     @Transactional
     @Modifying

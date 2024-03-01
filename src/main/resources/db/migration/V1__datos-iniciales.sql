@@ -1,7 +1,17 @@
-INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Lopez', '1', '321456', 'isidoro@mail.com', 'Isidoro', '$2a$10$C5EGU.8wYoIjO2Kw28ctKuG9bttkE3cB9oGInXapWRJDgQ70dSIuK');
-INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Lopez', '1', '314568', 'brhayan@mail.com', 'Brhayan', '$2a$10$8OBIdBjLIQ.He/pgKgiT2uwUe3ahRjjz6hwOifsE6AlBZG8PHsWoO');
-INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Lopez', '1', '314320', 'harwin@mail.com', 'Harwin', '$2a$10$gYYK38wn.hZjVpXW.l4ayuhSUPTA7SsoirLVpcmqf.tTYEoyPQASm');
-INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Suarez', '1', '316458', 'anita@mail.com', 'Anita', '$2a$10$uHcCxc7B0SGE/q0rKDA1Y.yTIiOf6vZlCtCoQngxw64PlgilVuP9C');
+INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Lopez', '1', 'Brhayan', '314568', 'brhayan@mail.com', 'Brhayan', '$2a$10$8OBIdBjLIQ.He/pgKgiT2uwUe3ahRjjz6hwOifsE6AlBZG8PHsWoO');
+INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Lopez', '1', 'Harwin', '314320', 'harwin@mail.com', 'Harwin', '$2a$10$gYYK38wn.hZjVpXW.l4ayuhSUPTA7SsoirLVpcmqf.tTYEoyPQASm');
+INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Suarez', '1', 'Anita', '316458', 'anita@mail.com', 'Anita', '$2a$10$uHcCxc7B0SGE/q0rKDA1Y.yTIiOf6vZlCtCoQngxw64PlgilVuP9C');
+INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Lopez', '1', 'Isidoro', '3116487', 'isidoro@mail.com', 'Isidoro', '$2a$10$uHcCxc7B0SGE/q0rKDA1Y.yTIiOf6vZlCtCoQngxw64PlgilVuP9C');
+
+INSERT INTO `adgan`.`roles` (`name`) VALUES ('ADMIN');
+INSERT INTO `adgan`.`roles` (`name`) VALUES ('USER');
+INSERT INTO `adgan`.`roles` (`name`) VALUES ('INVITED');
+INSERT INTO `adgan`.`roles` (`name`) VALUES ('INVITED');
+
+INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('1', '1');
+INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('2', '2');
+INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('3', '3');
+INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('4', '3');
 
 INSERT INTO `adgan`.`cattle` (`estado`, `fecha_nacimiento`, `id_owner`, `nombre`) VALUES ('0', '2022-04-21', '1', 'Shack');
 INSERT INTO `adgan`.`cattle` (`estado`, `fecha_nacimiento`, `id_owner`, `nombre`) VALUES ('0', '2022-06-23', '1', 'Mora');

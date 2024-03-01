@@ -2,6 +2,8 @@ package com.adgan.web.controller;
 
 import com.adgan.persitence.entity.OwnerEntity;
 import com.adgan.service.OwnerService;
+import com.adgan.service.dto.OwnerDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +37,12 @@ public class OwnerController {
     }
 
     @PostMapping
-    public ResponseEntity<OwnerEntity> addOwner(@RequestBody OwnerEntity owner) {
+    public ResponseEntity<OwnerEntity> addOwner(@Valid @RequestBody OwnerDTO owner) {
         return ResponseEntity.ok(this.ownerService.saveOwner(owner));
     }
 
     @PutMapping
-    public ResponseEntity<OwnerEntity> update(@RequestBody OwnerEntity owner) {
+    public ResponseEntity<OwnerEntity> update(@RequestBody OwnerDTO owner) {
         if (owner.getIdOwner() != null && this.ownerService.exists(owner.getIdOwner())) {
             return ResponseEntity.ok(this.ownerService.saveOwner(owner));
         }

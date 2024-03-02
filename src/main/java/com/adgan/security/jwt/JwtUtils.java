@@ -22,7 +22,8 @@ public class JwtUtils {
     @Value("${jwt.time.expiration}")
     private String timeExpiration;
 
-    public String generateAccessToken(String username) {
+    //Crear token
+    public String generateAccesToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -31,12 +32,14 @@ public class JwtUtils {
                 .compact();
     }
 
+    //Obtener firma del token
     public Key getSignatureKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public boolean isValidToken(String token) {
+    //Validar token de acceso
+    public boolean isTokenValid(String token) {
         try {
             Jwts.parser()
                     .setSigningKey(getSignatureKey())
@@ -50,19 +53,23 @@ public class JwtUtils {
         }
     }
 
+    //obtener los claims del token
     public Claims extractAllClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(getSignatureKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+
     }
 
-    public <T> T getClaim (String token, Function<Claims, T> claimsTFunction) {
+    //Obtener un solo claim
+    public <T> T getClaim(String token, Function<Claims, T> claimsTFunction) {
         Claims claims = extractAllClaims(token);
         return claimsTFunction.apply(claims);
     }
 
+    //Obtener username del token
     public String getUsernameFromToken(String token) {
         return getClaim(token, Claims::getSubject);
     }

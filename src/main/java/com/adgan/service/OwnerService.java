@@ -7,6 +7,7 @@ import com.adgan.persitence.repository.OwnerRepository;
 import com.adgan.service.dto.OwnerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +16,17 @@ import java.util.stream.Collectors;
 
 @Service
 public class OwnerService {
+    @Autowired
     private final OwnerRepository ownerRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public OwnerService(OwnerRepository ownerRepository, BCryptPasswordEncoder passwordEncoder) {
+    private final PasswordEncoder passwordEncoder;
+
+    public OwnerService(OwnerRepository ownerRepository, PasswordEncoder passwordEncoder) {
         this.ownerRepository = ownerRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
 
     public List<OwnerEntity> getAll() {
         return this.ownerRepository.findAll();

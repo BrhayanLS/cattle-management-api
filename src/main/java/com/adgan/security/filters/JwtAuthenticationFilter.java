@@ -16,13 +16,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
     private final JwtUtils jwtUtils;
 
     public JwtAuthenticationFilter(JwtUtils jwtUtils) {
@@ -30,15 +30,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        OwnerEntity ownerEntity = null;
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException {
+        OwnerEntity userEntity = null;
         String username;
         String password;
         try {
-            ownerEntity = new ObjectMapper().readValue(request.getInputStream(), OwnerEntity.class);
-            username = ownerEntity.getUsername();
-            password = ownerEntity.getPassword();
-        }  catch (StreamReadException e) {
+            userEntity = new ObjectMapper().readValue(request.getInputStream(), OwnerEntity.class);
+            username = userEntity.getUsername();
+            password = userEntity.getPassword();
+        } catch (StreamReadException e) {
             throw new RuntimeException(e);
         } catch (DatabindException e) {
             throw new RuntimeException(e);
@@ -46,19 +47,20 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             throw new RuntimeException(e);
         }
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(username,password);
+                new UsernamePasswordAuthenticationToken(username, password);
         return getAuthenticationManager().authenticate(authenticationToken);
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         User user = (User) authResult.getPrincipal();
-        String token = jwtUtils.generateAccessToken(user.getUsername());
+        String token = jwtUtils.generateAccesToken(user.getUsername());
+
         response.addHeader("Authorization", token);
 
         Map<String, Object> httpResponse = new HashMap<>();
         httpResponse.put("token", token);
-        httpResponse.put("Message", "Autenticacion Correcta!");
+        httpResponse.put("Message", "Autenticacion Correcta");
         httpResponse.put("Username", user.getUsername());
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(httpResponse));

@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
-    private OwnerRepository userRepository;
+    private OwnerRepository ownerRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        OwnerEntity userEntity = userRepository.findByUsername(username)
+        OwnerEntity userEntity = ownerRepository.findByUsername(username)
                 .orElseThrow(()-> new UsernameNotFoundException("El usuario "+ username + " no existe."));
 
         Collection<? extends GrantedAuthority> authorities = userEntity.getRoles()

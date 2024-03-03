@@ -23,7 +23,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private UserDetailServiceImpl userDetailService;
+    private UserDetailServiceImpl ownerRepository;
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
@@ -34,7 +34,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
             if (jwtUtils.isTokenValid(token)) {
                 String username = jwtUtils.getUsernameFromToken(token);
-                UserDetails userDetails = userDetailService.loadUserByUsername(username);
+                UserDetails userDetails = ownerRepository.loadUserByUsername(username);
 
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(username,null, userDetails.getAuthorities());

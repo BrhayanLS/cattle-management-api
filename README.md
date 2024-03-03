@@ -25,27 +25,27 @@ La API de gestion ganadera "AdGan" es un proyecto backend contruido con Java y S
 
 Construccion de la base de datos relacional y las vistas para consultas personalizadas
 
-![Base De Datos](https://lh3.googleusercontent.com/pw/AP1GczNZ6JysaryqydfSYsLcGohq00X_pKWDqV14ZpiqqxUiG0PjCETOKjgl-QnY61aPirddJRl8pqPyDvUYuzAW9Gjq_1f3k3sJhCXJTjNBrUkLri9OVga2cu24uBhPTxdwOwbyDM-xHpwU6ZYJhQp-zCqPmJF8JWb2z46VMLhTF4H4B_oWop2D5q3C7mgSaSOPqzx2PDck8KkeW3u2DQ1KPYkZJcPDkjeWcpdg6Ge7eRBTPy4VZcGFWoB0VP6CPAd89zaaOjqeHLVTGW5bd0y0uFEwsl-RU3IkrfeXFjnGu75QBf8uBbSD0rwkM6AbMgBfyqx2Q83XTKhIuwiB57qWr8WoVeKwnLeDfd4Is7SEFqZ-nYPmqN-SbXp3v1Vi3e7pMxxFyJma-o3WlSFJKNBhs9TOofWZ1jC8xwD86_35HQKiR3VLhoAk_YJfSTtFfVsOzKzbcLAMdyzpZSgnve1Bh7iCbjbdunao43bUyNT08C2kYSTjWcrd7qEmMJsN1FKWXplYff5zg-aLS6esc0iADT0X2HoRtddeaLav3v5NglFlSxjpWwxUL5CTg1t4NEPRgkMxix3L4XENnxbSulgWxYIi5c0-clC-paXwEYralNJPz3yYxJPgtaGQ8-Mf3fYDGKMmCg0VC1CyeW9dhQhhZ-B0sY2k7iA7jzO6TxknlDRQEHnSRGTLNlxqtyOCwazujSwklHlNAzQcDAS_rZHFG2wr9xXFWOABfymZyo8S_nE5_vDK5pKIxBsdSaiw53NEul-QfOx6PPBLjKCwxZ5kb2D7Yi-RHqPSSPFo40hi48zJoBC6DQNIWVXuo1t5J-pJhHglPKCypsZFVB1-9A66eiV2qqOmjGhPus0Hozpwp1GazAQJSTimaYDu6mvIQboGO3AVWu66PMzqYNB-vn9cMdsX_iAFLoPs-0gfUbnZXpglM9JYWppxwCYVJ9vWb2Wt_mAvPGWFaim59SbvK37wfaYauLCSMsacLqjsf80KfhTcaz_8bcbUa0OtVJ7OvgzVeCQEa9OozE9nL3qD1JJNE0W06lZABCmxJ-hFBQ8=w705-h393-s-no-gm?authuser=0)
+![Base De Datos](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/Base%20de%20datos.png)
 
 Ejemplo de creacion de usuarios. Hay tres roles posibles: ADMIN, USER e INVITED
 
-![Created Owner](https://drive.google.com/file/d/1WAhqP5MOQT283NEFxUIKpGSREVMx1qAd/view?usp=sharing)
+![Created Owner](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/Prueba%20SaveOwner.png)
 
 Ejemplo de logueo y generacion de token de autenticacion
 
-![Login](https://drive.google.com/file/d/1U8BnPgRT4T_DKxQYjlRk56SUn276pXBi/view?usp=sharing)
+![Login](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/Prueba%20Login.png)
 
 Para los demas EndPoints se debe autenticar primero, para esto seleccionamos "Authorization" en "Type" seleccionamos "Bearer Token" y en el recuadro de la derecha pegamos el token que obtuvimos con anterioridad
 
-![Autenticacion](https://drive.google.com/file/d/1iuLZs6ZKLxQ5OC2HA18IsBJRqu7GSJtc/view?usp=sharing)
+![Autenticacion](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/Autenticacion.png)
 
 Estando autenticados podemos hacer las solicitudes
 
-![Prueba Cattles](https://drive.google.com/file/d/1O7ze3--KZmB8MoQAB5AqiR2Y9PfSYLAU/view?usp=sharing)
+![Prueba Cattles](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/Prueba%20Cattles.png)
 
 De lo contrario obtendremos errores 403 que significa que nuestro token no es valido y es necesario autenticarnos correctamente
 
-![No Autorizado](https://drive.google.com/file/d/1AGEI76kbQiXEbaN2Idbw_ysEC19x43-8/view?usp=sharing)
+![No Autorizado](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/No%20Autorizado.png)
 
 ## Deployment
 

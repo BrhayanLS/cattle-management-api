@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-//@ComponentScan(basePackages = "com.adgan.service.config.SecurityConfig")
 public class AdganApplication {
 
 	public static void main(String[] args) {

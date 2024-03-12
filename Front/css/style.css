@@ -1,0 +1,125 @@
+.header, .tecno {
+    font-family: poppins;
+    background: rgb(5, 37, 0);
+    background: linear-gradient(90deg, rgba(5, 37, 0, 1) 50%, rgba(23, 89, 14, 1) 100%);
+    padding: 10px 0px;
+    background-size: 100% 100%;
+    background-position: center center;
+}
+
+.navbar a {
+    color: #fff;
+}
+
+.navbar a:hover, .nav-link.show {
+    color: #c3fcb6 !important;
+}
+
+.dropdown-menu a {
+    color: #000;
+    background: #c3fcb6;
+}
+
+
+/*------------------------------------------------------------------------------------------------*/
+
+.banner-main {
+    position: relative;
+    font-family: poppins;
+}
+
+.banner-main .carousel-item img {
+    width: 100%;
+}
+
+.banner-main .carousel-caption span {
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 60px;
+    color: #1e8a0b;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    display: block;
+}
+
+.banner-main .carousel-caption h1 {
+    color: #fff;
+    font-size: 7em;
+    line-height: 84px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.banner-main .carousel-caption p {
+    color: #f2feef;
+    font-size: 2.3em;
+    line-height: 31px;
+    padding: 6px 0px 50px 0px;
+}
+
+/*--------------------------------------------------------------------------------*/
+.about_box {
+    margin: auto;
+}
+
+.about_box span {
+    font-size: 2em;
+    font-weight: bold;
+    color: #1e8a0b;
+    display: inline-block;
+}
+
+.about {
+    padding: 2em;
+}
+
+.about .about_box {
+    text-align: left;
+}
+
+.about .about_box h2 {
+    font-weight: 500;
+    font-size: 43px;
+    color: #163f03;
+    line-height: 55px;
+    padding-bottom: 7px;
+    display: block;
+    text-transform: uppercase;
+    padding: 0px 0px 6px 0px;
+    border-bottom: #163f03 solid 1px;
+}
+
+.about .about_box p {
+    font-size: 17px;
+    line-height: 33px;
+    color: #4c4a49;
+    padding: 40px 0px;
+    font-weight: 500;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+.img-icon {
+    margin: 0 1em;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+--deep-fir-50: #f2feef;
+--deep-fir-100: #e0ffd9;
+--deep-fir-200: #c3fcb6;
+--deep-fir-300: #92f87d;
+--deep-fir-400: #59eb3d;
+--deep-fir-500: #31d413;
+--deep-fir-600: #23b009;
+--deep-fir-700: #1e8a0b;
+--deep-fir-800: #1d6c0f;
+--deep-fir-900: #17590e;
+--deep-fir-950: #052501;
+

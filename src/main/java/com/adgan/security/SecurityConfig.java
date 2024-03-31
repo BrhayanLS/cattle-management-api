@@ -15,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -30,6 +31,19 @@ public class SecurityConfig {
     JwtAuthorizationFilter authorizationFilter;
 
     @Bean
+    public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .cors(config -> config.disable())
+                .authorizeHttpRequests()
+                .requestMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().permitAll()
+                .and().httpBasic()
+                .and().build();
+    }
+
+    /* @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, AuthenticationManager authenticationManager) throws Exception {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtUtils);
         jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
@@ -40,13 +54,19 @@ public class SecurityConfig {
                     auth.requestMatchers("/owner/save","/login").permitAll();
                     auth.anyRequest().authenticated();
                 })
+                .formLogin(login -> {
+                    login.successHandler(successHandler());
+                    login.permitAll();
+                })
                 .sessionManagement(session -> {
-                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                    session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+                    session.invalidSessionUrl("/login");
+                    session.maximumSessions(1);
                 })
                 .addFilter(jwtAuthenticationFilter)
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-    }
+    } */
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -59,5 +79,11 @@ public class SecurityConfig {
                 .userDetailsService(userDetailService)
                 .passwordEncoder(passwordEncoder)
                 .and().build();
+    }
+
+    public AuthenticationSuccessHandler successHandler() {
+        return ((request, response, authentication) -> {
+            response.sendRedirect("https://storied-caramel-b8191a.netlify.app/");
+        });
     }
 }

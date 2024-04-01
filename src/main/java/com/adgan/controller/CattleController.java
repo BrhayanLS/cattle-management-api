@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/cattle")
 public class CattleController {
@@ -49,13 +50,13 @@ public class CattleController {
     }
 
     @GetMapping("/sold")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<CattleSoldResume>> getSoldResume(){
         return ResponseEntity.ok(this.cattleService.getSoldResume());
     }
 
     @GetMapping("/dead")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<AllCattles>> getDeadCattles(){
         return ResponseEntity.ok(this.cattleService.getDeadCattles());
     }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/owner")
 public class OwnerController {
@@ -23,19 +24,19 @@ public class OwnerController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<OwnerEntity>> getAll() {
         return ResponseEntity.ok(this.ownerService.getAll());
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<OwnerEntity>> getOwners() {
         return ResponseEntity.ok(this.ownerService.getOwners());
     }
 
     @GetMapping("/{idOwner}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<OwnerEntity> getOwnerById(@PathVariable int idOwner) {
         return ResponseEntity.ok(this.ownerService.getById(idOwner));
     }

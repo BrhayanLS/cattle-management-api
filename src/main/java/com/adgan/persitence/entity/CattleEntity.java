@@ -36,18 +36,11 @@ public class CattleEntity {
 
     @Column(name = "id_owner", nullable = false)
     private Integer idOwner;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_owner", referencedColumnName = "id_owner", insertable = false, updatable = false)
     private OwnerEntity owner;
 
     @OneToOne(mappedBy = "cattle")
     private SaleCattleEntity saleCattle;
-
-    @Override
-    public String toString() {
-        return "CattleEntity{" +
-                "idCattle=" + idCattle +
-                "nombre=" + nombre +
-                '}';
-    }
 }

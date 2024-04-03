@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/cattle")
 public class CattleController {
@@ -25,37 +26,37 @@ public class CattleController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<AllCattles>> getAll(){
         return ResponseEntity.ok(this.cattleService.getAll());
     }
 
     @GetMapping("/cattles")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<AllCattles>> getCattles(){
         return ResponseEntity.ok(this.cattleService.getCattles());
     }
 
     @GetMapping("/{idCattle}")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<Optional<AllCattles>> getCattleById(@PathVariable int idCattle) {
         return ResponseEntity.ok(this.cattleService.getCattleById(idCattle));
     }
 
     @GetMapping("/resume")
-    @PreAuthorize("hasAnyRole('ADMIN','USER','INVITED')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER','INVITED')")
     public ResponseEntity<List<CattleResume>> getCattleResume(){
         return ResponseEntity.ok(this.cattleService.getCattleResume());
     }
 
     @GetMapping("/sold")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<CattleSoldResume>> getSoldResume(){
         return ResponseEntity.ok(this.cattleService.getSoldResume());
     }
 
     @GetMapping("/dead")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<AllCattles>> getDeadCattles(){
         return ResponseEntity.ok(this.cattleService.getDeadCattles());
     }

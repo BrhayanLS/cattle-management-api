@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/sale")
 public class SaleController {
@@ -23,17 +24,17 @@ public class SaleController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<SaleDTO>> getAll() { return ResponseEntity.ok(this.saleService.getAll());}
 
     @GetMapping("/sales")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<SaleDTO>> getSales() {
         return ResponseEntity.ok(this.saleService.getSales());
     }
 
-    @GetMapping("/sale/{idSale}")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/{idSale}")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<SaleDTO> getSaleById(@PathVariable int idSale) {
         return ResponseEntity.ok(this.saleService.getSaleById(idSale));
     }

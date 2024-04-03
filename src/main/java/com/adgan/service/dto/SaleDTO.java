@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 public class SaleDTO {
     private Integer idSale;
+    private Boolean estado;
     private LocalDate fechaVenta;
     private Integer precioKilo;
     private Integer valorCamion;

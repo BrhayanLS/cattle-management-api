@@ -73,6 +73,7 @@ public class SaleService {
     private SaleDTO mapEntityToDTO(SaleEntity entity) {
         SaleDTO dto = new SaleDTO();
         dto.setIdSale(entity.getIdSale());
+        dto.setEstado(entity.getEstado());
         dto.setFechaVenta(entity.getFechaVenta());
         dto.setPrecioKilo(entity.getPrecioKilo());
         dto.setValorCamion(entity.getValorCamion());

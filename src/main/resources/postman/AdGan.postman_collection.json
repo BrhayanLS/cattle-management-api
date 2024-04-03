@@ -15,7 +15,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIYXJ3aW4iLCJpYXQiOjE3MDkzNTEwMDIsImV4cCI6MTcwOTQzNzQwMn0.ys0O1QXhKye-NdkarI3mqzGUEN4Bo9hxeUsdtCNAln4"
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyMDIwNywiZXhwIjoxNzA5NjA2NjA3fQ.KsUz8FXv7k52jp7S0XjxJi-J1yn0ylQ3wtg0rVTf_VY"
 							}
 						},
 						"method": "GET",
@@ -30,12 +30,12 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJCcmhheWFuIiwiaWF0IjoxNzA5MjY2ODk0LCJleHAiOjE3MDkzNTMyOTR9.y3mJagSZv3pGBTeXc5WMq5p0yyPVLzntDNZnsEvgV8A"
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyMDIwNywiZXhwIjoxNzA5NjA2NjA3fQ.KsUz8FXv7k52jp7S0XjxJi-J1yn0ylQ3wtg0rVTf_VY"
 							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/owner/2"
+						"url": "http://localhost:8080/owner/3"
 					},
 					"response": []
 				},
@@ -73,7 +73,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idOwner\" : \"5\",\r\n    \"apellido\": \"PruebaM\",\r\n    \"contacto\": \"154681\",\r\n    \"correo\": \"pruebam@mail.com\",\r\n    \"username\" : \"PruebaM\",\r\n    \"nombre\": \"PruebaM\",\r\n    \"password\": \"pass\",\r\n    \"roles\" : [\"ADMIN\"]\r\n}",
+							"raw": "{\r\n    \"idOwner\": 3,\r\n    \"apellido\": \"Invitado\",\r\n    \"contacto\": \"316458\",\r\n    \"correo\": \"invitadoA@mail.com\",\r\n    \"username\" : \"Invitado\",\r\n    \"nombre\": \"Invitado\",\r\n    \"password\": \"pass\",\r\n    \"roles\" : [\"ADMIN\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -125,7 +125,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIYXJ3aW4iLCJpYXQiOjE3MDkzNTEwMDIsImV4cCI6MTcwOTQzNzQwMn0.ys0O1QXhKye-NdkarI3mqzGUEN4Bo9hxeUsdtCNAln4"
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyMzU4MiwiZXhwIjoxNzA5NjA5OTgyfQ.MQR03rZY3Micn-ZYw1Dpk3jmQYz9Aa_t2lilDn9tAiE"
 							}
 						},
 						"method": "GET",
@@ -140,7 +140,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcnVlYmEiLCJpYXQiOjE3MDk0NDI0NDYsImV4cCI6MTcwOTUyODg0Nn0.lZ5BD7N1ahr_U6ZzuaUWoLAoQpiNV9mAmOZ3ddyfIKU"
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyMzU4MiwiZXhwIjoxNzA5NjA5OTgyfQ.MQR03rZY3Micn-ZYw1Dpk3jmQYz9Aa_t2lilDn9tAiE"
 							}
 						},
 						"method": "GET",
@@ -170,12 +170,12 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcnVlYmEiLCJpYXQiOjE3MDk0NDI0NDYsImV4cCI6MTcwOTUyODg0Nn0.lZ5BD7N1ahr_U6ZzuaUWoLAoQpiNV9mAmOZ3ddyfIKU"
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyMzU4MiwiZXhwIjoxNzA5NjA5OTgyfQ.MQR03rZY3Micn-ZYw1Dpk3jmQYz9Aa_t2lilDn9tAiE"
 							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/cattle"
+						"url": "http://localhost:8080/cattle/resume"
 					},
 					"response": []
 				},
@@ -231,14 +231,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idCattle\": 4,\r\n    \"nombre\": \"PruebaM\",\r\n    \"fechaNacimiento\": \"2022-02-20\",\r\n    \"idOwner\": 3,\r\n    \"estado\": true\r\n}",
+							"raw": "{\r\n    \"idCattle\": 4,\r\n    \"nombre\": \"PruebaM\",\r\n    \"fechaNacimiento\": \"2022-02-20\",\r\n    \"idOwner\": 3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/cattle"
+						"url": "http://localhost:8080/cattle/update"
 					},
 					"response": []
 				},
@@ -253,7 +253,7 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8080/cattle/10"
+						"url": "http://localhost:8080/cattle/delete/4"
 					},
 					"response": []
 				},
@@ -283,7 +283,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIYXJ3aW4iLCJpYXQiOjE3MDkzNTEwMDIsImV4cCI6MTcwOTQzNzQwMn0.ys0O1QXhKye-NdkarI3mqzGUEN4Bo9hxeUsdtCNAln4"
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyNTMwMywiZXhwIjoxNzA5NjExNzAzfQ.NRmQ-unJoGTeVhrlwYVwLt7mwe_oUYiJSeLsQCo8pE0"
 							}
 						},
 						"method": "GET",
@@ -298,12 +298,12 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcnVlYmEiLCJpYXQiOjE3MDk0NDI0NDYsImV4cCI6MTcwOTUyODg0Nn0.lZ5BD7N1ahr_U6ZzuaUWoLAoQpiNV9mAmOZ3ddyfIKU"
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyNTMwMywiZXhwIjoxNzA5NjExNzAzfQ.NRmQ-unJoGTeVhrlwYVwLt7mwe_oUYiJSeLsQCo8pE0"
 							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/sale"
+						"url": "http://localhost:8080/sale/sales"
 					},
 					"response": []
 				},
@@ -313,12 +313,12 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcnVlYmEiLCJpYXQiOjE3MDk0NDI0NDYsImV4cCI6MTcwOTUyODg0Nn0.lZ5BD7N1ahr_U6ZzuaUWoLAoQpiNV9mAmOZ3ddyfIKU"
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyNTMwMywiZXhwIjoxNzA5NjExNzAzfQ.NRmQ-unJoGTeVhrlwYVwLt7mwe_oUYiJSeLsQCo8pE0"
 							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/sale/20"
+						"url": "http://localhost:8080/sale/sale/1"
 					},
 					"response": []
 				},
@@ -326,24 +326,23 @@
 					"name": "Save Sale",
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": {
-								"password": "1234",
-								"username": "brhayan"
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyNTMwMywiZXhwIjoxNzA5NjExNzAzfQ.NRmQ-unJoGTeVhrlwYVwLt7mwe_oUYiJSeLsQCo8pE0"
 							}
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fechaVenta\": \"2023-10-21\",\r\n    \"precioKilo\": 8700,\r\n    \"valorCamion\": 250000,\r\n    \"valorBascula\": 110000,\r\n    \"saleCattles\": [\r\n        {\r\n            \"cattleId\": 4,\r\n            \"peso\": 654\r\n        },\r\n        {\r\n            \"cattleId\": 6,\r\n            \"peso\": 499\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"fechaVenta\": \"2023-10-21\",\r\n    \"precioKilo\": 8700,\r\n    \"valorCamion\": 250000,\r\n    \"valorBascula\": 110000,\r\n    \"saleCattles\": [\r\n        {\r\n            \"cattleId\": 3,\r\n            \"peso\": 654\r\n        },\r\n        {\r\n            \"cattleId\": 6,\r\n            \"peso\": 499\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/sale"
+						"url": "http://localhost:8080/sale/save"
 					},
 					"response": []
 				},
@@ -353,14 +352,14 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcnVlYmEiLCJpYXQiOjE3MDk0NDI0NDYsImV4cCI6MTcwOTUyODg0Nn0.lZ5BD7N1ahr_U6ZzuaUWoLAoQpiNV9mAmOZ3ddyfIKU"
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTcwOTUyNTMwMywiZXhwIjoxNzA5NjExNzAzfQ.NRmQ-unJoGTeVhrlwYVwLt7mwe_oUYiJSeLsQCo8pE0"
 							}
 						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idSale\": 1,\r\n    \"fechaVenta\": \"2023-10-21\",\r\n    \"precioKilo\": 8700,\r\n    \"valorCamion\": 250000,\r\n    \"valorBascula\": 110000,\r\n    \"saleCattles\": [\r\n        {\r\n            \"idSaleCattle\": 1,\r\n            \"cattleId\": 1,\r\n            \"peso\": 654\r\n        },\r\n        {\r\n            \"idSaleCattle\": 2,\r\n            \"cattleId\": 2,\r\n            \"peso\": 499\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"idSale\": 2,\r\n    \"fechaVenta\": \"2023-10-21\",\r\n    \"precioKilo\": 8700,\r\n    \"valorCamion\": 250000,\r\n    \"valorBascula\": 110000,\r\n    \"saleCattles\": [\r\n        {\r\n            \"idSaleCattle\": 1,\r\n            \"cattleId\": 3,\r\n            \"peso\": 650\r\n        },\r\n        {\r\n            \"idSaleCattle\": 2,\r\n            \"cattleId\": 6,\r\n            \"peso\": 450\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -398,7 +397,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\" : \"Prueba\",\r\n    \"password\" : \"pass\"\r\n}",
+					"raw": "{\r\n    \"username\" : \"Admin\",\r\n    \"password\" : \"1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

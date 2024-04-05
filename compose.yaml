@@ -5,17 +5,23 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=jdbc:mysql://dbmysql:3306/adgan
-      - DATABASE_USERNAME = admin
-      - DATABASE_PASSWORD = admin
-    depends_on:
-      - dbmysql
-  dbmysql:
-    image: mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: 'adgan'
-      MYSQL_USER: 'admin'
-      MYSQL_PASSWORD: 'admin'
-      MYSQL_ROOT_PASSWORD: 'root'
+      - DATABASE_URL
+      - DATABASE_USERNAME
+      - DATABASE_PASSWORD
+#    depends_on:
+#      - dbmysql
+#  dbmysql:
+#    image: mysql
+#    healthcheck:
+#      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+#      interval: 5s
+#      timeout: 10s
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      MYSQL_DATABASE: 'adgan'
+#      MYSQL_USER: 'admin'
+#      MYSQL_PASSWORD: 'admin'
+#      MYSQL_ROOT_PASSWORD: 'root'
+#    volumes:
+#      - ./src/main/resources/db/migration:/docker-entrypoint-initdb.d

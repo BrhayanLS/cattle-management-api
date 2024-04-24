@@ -25,6 +25,15 @@ public class CattleService {
         return this.cattleRepository.save(cattle);
     }
 
+    public CattleEntity updateCattle (CattleEntity cattle, boolean status){
+        cattle.setEstado(status);
+        return this.cattleRepository.save(cattle);
+    }
+
+    public Optional<CattleEntity> findById (int id) {
+        return this.cattleRepository.findById(id);
+    }
+
     public List<AllCattles> getAll(){
         return  this.cattleRepository.getAllCattles();
     }

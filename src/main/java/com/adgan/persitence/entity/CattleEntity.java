@@ -1,5 +1,6 @@
 package com.adgan.persitence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,6 +39,7 @@ public class CattleEntity {
     private Integer idOwner;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "id_owner", referencedColumnName = "id_owner", insertable = false, updatable = false)
     private OwnerEntity owner;
 

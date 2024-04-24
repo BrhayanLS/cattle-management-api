@@ -7,6 +7,7 @@ public interface AllCattles {
     Byte getEstado();
     String getNombre();
     LocalDate getFechaNacimiento();
+    Integer getIdOwner();
     String getNombreOwner();
     String getApellido();
     String getContacto();

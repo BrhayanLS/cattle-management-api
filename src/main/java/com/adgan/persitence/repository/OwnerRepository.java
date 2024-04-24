@@ -1,6 +1,7 @@
 package com.adgan.persitence.repository;
 
 import com.adgan.persitence.entity.OwnerEntity;
+import com.adgan.persitence.projection.AllCattles;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -55,7 +55,14 @@ public class OwnerEntity {
     @JsonIgnore
     private List<CattleEntity> cattle;
 
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = RoleEntity.class, cascade = CascadeType.PERSIST)
+    /*@ManyToMany(fetch = FetchType.EAGER, targetEntity = RoleEntity.class, cascade = CascadeType.PERSIST)
     @JoinTable(name = "owner_roles", joinColumns = @JoinColumn(name = "owner_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "role_id")
+    private RoleEntity role;*/
+
+    @Enumerated(EnumType.STRING)
+    private ERole role;
 }

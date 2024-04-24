@@ -23,11 +23,11 @@ public interface CattleRepository extends ListCrudRepository<CattleEntity, Integ
 
   @Query(value =
           "SELECT c.id_cattle AS idCattle, c.estado, c.nombre, c.fecha_nacimiento AS fechaNacimiento, " +
-                  "c.id_owner AS idOwner, o.nombre AS nombreOwner, o.apellido, o.contacto, o.correo " +
+                  "o.id_owner AS idOwner, o.nombre AS nombreOwner, o.apellido, o.contacto, o.correo " +
                   "FROM cattle c " +
                   "LEFT JOIN owner o ON c.id_owner = o.id_owner " +
-                  "WHERE c.id_cattle = :idOwner", nativeQuery = true)
-  Optional<AllCattles> getCattlesById(@Param("idOwner") int idOwner);;
+                  "WHERE c.id_cattle = :idCattle", nativeQuery = true)
+  Optional<AllCattles> getCattlesById(@Param("idCattle") int idCattle);;
 
 
   @Query(value =

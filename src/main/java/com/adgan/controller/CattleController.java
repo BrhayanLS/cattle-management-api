@@ -7,7 +7,6 @@ import com.adgan.persitence.projection.CattleSoldResume;
 import com.adgan.service.CattleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class CattleController {
     }
 
     @GetMapping("/all")
-    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<List<AllCattles>> getAll(){
         return ResponseEntity.ok(this.cattleService.getAll());
     }
@@ -62,21 +61,23 @@ public class CattleController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<CattleEntity> addCattle(@RequestBody CattleEntity cattle){
         return ResponseEntity.ok(this.cattleService.saveCattle(cattle));
     }
     @PutMapping("/update")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CattleEntity> update(@RequestBody CattleEntity cattle){
         if (cattle.getIdCattle() != null && this.cattleService.exists(cattle.getIdCattle())){
-            return ResponseEntity.ok(this.cattleService.saveCattle(cattle));
+            Optional<CattleEntity> exist = this.cattleService.findById(cattle.getIdCattle());
+            boolean status = exist.get().getEstado();
+            return ResponseEntity.ok(this.cattleService.updateCattle(cattle, status));
         }
         return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/delete/{idCattle}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete (@PathVariable int idCattle){
         if (this.cattleService.exists(idCattle)){
             this.cattleService.deleteCattle(idCattle);

@@ -34,5 +34,5 @@ public class OwnerDTO {
     @NotBlank
     private String password;
 
-    private Set<String> roles;
+    private String role;
 }

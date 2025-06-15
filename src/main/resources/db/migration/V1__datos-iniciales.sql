@@ -8,7 +8,6 @@ INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `corr
 INSERT INTO `adgan`.`roles` (`name`) VALUES ('ADMIN');
 INSERT INTO `adgan`.`roles` (`name`) VALUES ('USER');
 INSERT INTO `adgan`.`roles` (`name`) VALUES ('INVITED');
-INSERT INTO `adgan`.`roles` (`name`) VALUES ('INVITED');
 
 INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('1', '1');
 INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('2', '2');

@@ -1,49 +1,107 @@
-# API de Gestión Ganadera (AdGan)
+# API de Gestión Ganadera (AdGan) 🐄
 
-¡Bienvenido/a al API de Gestión Ganadera "AdGan"! Este proyecto backend, construido con Java y Spring Boot, está diseñado para ayudar a los ganaderos a gestionar los registros de sus fincas de una manera eficiente y segura.
+## Descripción
+AdGan es una API REST desarrollada en Java con Spring Boot que proporciona una solución completa para la gestión de fincas ganaderas. Permite el manejo de inventario de ganado, registro de ventas, gestión de usuarios y seguimiento de operaciones diarias.
 
-## Características 🐄
+## Características Principales 🌟
 
-- **Manejo de Animales:** Registra y administra los animales bovinos de tu finca.
-- **Creación de Usuarios:** Registra usuarios con diferentes niveles de acceso basados en roles específicos.
-- **Registro de Ventas:** Registra las ventas de ganado y sus costos asociados para calcular las ganancias netas.
-- **Operaciones CRUD:** Permite crear, leer, actualizar y ocultar datos (en lugar de eliminarlos) en la base de datos.
+### Gestión de Ganado
+- Registro completo de animales (nombre, edad, peso, estado
+- Historial de ventas por animal y costos asociados
+- Cálculo automático de ganancias
 
-## Tecnologías Utilizadas 💻
+### Sistema de Usuarios
+- Múltiples roles (ADMIN, USER, INVITED)
+- Autenticación JWT
+- Gestión de permisos por rol
+- Registro y actualización de perfiles
 
-- **Java:** Lenguaje principal del proyecto.
-- **Spring Boot:** Facilita la configuración y el desarrollo de aplicaciones Java.
-- **Spring Data JPA:** Simplifica la interacción con la base de datos.
-- **Spring Security con JWT:** Proporciona autenticación y autorización seguras para los usuarios.
-- **MySQL:** Base de datos relacional.
-- **Maven:** Manejador de dependencias.
+### Gestión de Ventas
+- Registro detallado de transacciones
+- Cálculo de precios por kilo
+- Control de costos (báscula, camión)
+- Generación de resúmenes financieros
 
-## Capturas de Pantalla 📸
+## Arquitectura del Proyecto 🏗️
 
-Aquí puedes ver algunos ejemplos visuales del proyecto:
+### Estructura de Paquetes
+```
+com.adgan
+├── controller/     # Controladores REST
+├── service/        # Lógica de negocio
+│   └── dto/       # Objetos de transferencia de datos
+├── persistence/    # Capa de persistencia
+│   ├── entity/    # Entidades JPA
+│   ├── repository/# Repositorios
+│   └── projection/# Vistas de datos
+└── config/        # Configuraciones
+```
 
-- **Base de Datos:**
-![Base De Datos](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/Base%20de%20datos.png)
+### Tecnologías Utilizadas 💻
+- **Backend**: Java 17, Spring Boot 3.2.0
+- **Base de Datos**: MySQL
+- **ORM**: Spring Data JPA
+- **Seguridad**: Spring Security + JWT
+- **Documentación**: Swagger/OpenAPI
+- **Gestión de Dependencias**: Maven
 
-- **Creación de Usuarios:**
-![Created Owner](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/Prueba%20SaveOwner.png)
+## Requisitos del Sistema 📋
+- JDK 17 o superior
+- MySQL 8.0 o superior
+- Maven 3.6 o superior
+- IDE recomendado: IntelliJ IDEA
 
-- **Autenticación y Generación de Tokens:**
-![Login](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/Prueba%20Login.png)
+## Configuración e Instalación 🚀
 
-- **Ejemplo de Autenticación en Postman:**
-![Autenticación](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/Screenshots/Autenticacion.png)
+1. **Clonar el Repositorio**
+   ```bash
+   git clone https://github.com/BrhayanLS/adgan.git
+   cd adgan
+   ```
 
-## Implementación y Pruebas 🚀
+2. **Configurar Base de Datos**
+   - Crear base de datos MySQL
+   - Configurar `application.properties` con credenciales
 
-Para ejecutar el proyecto:
+3. **Compilar y Ejecutar**
+   ```bash
+   mvn clean install
+   mvn spring-boot:run
+   ```
 
-1. Asegúrate de tener instalado [JDK 17](https://adoptium.net/es/temurin/releases/?os=any&package=jdk&version=17).
-2. Recomiendo usar [IntelliJ IDEA](https://www.jetbrains.com/es-es/idea/download/?section=windows) como IDE.
-3. Configura las credenciales de tu base de datos en el archivo [application.properties](https://github.com/BrhayanLS/adgan/blob/main/src/main/resources/application.properties).
-4. Para pruebas, utiliza [Postman](https://www.postman.com/downloads/) y descarga el archivo JSON de endpoints desde [aquí](https://github.com/BrhayanLS/adgan/tree/main/src/main/resources/postman).
+## Documentación de API 📚
 
-## Distribución de Permisos por Roles 🔑
+### Endpoints Principales
+
+#### Gestión de Ganado
+- `GET /cattle/all` - Listar todo el ganado
+- `GET /cattle/{id}` - Obtener ganado por ID
+- `POST /cattle/save` - Registrar nuevo ganado
+- `PUT /cattle/update` - Actualizar ganado
+- `DELETE /cattle/{id}` - Eliminar ganado
+
+#### Gestión de Usuarios
+- `GET /owner/all` - Listar todos los usuarios
+- `POST /owner/save` - Registrar nuevo usuario
+- `PUT /owner/update` - Actualizar usuario
+- `DELETE /owner/{id}` - Eliminar usuario
+
+#### Gestión de Ventas
+- `GET /sale/all` - Listar todas las ventas
+- `POST /sale/save` - Registrar nueva venta
+- `PUT /sale/update` - Actualizar venta
+- `DELETE /sale/{id}` - Eliminar venta
+
+## Seguridad y Permisos 🔒
+
+### Roles y Permisos
+| Rol     | Descripción                    |
+|---------|--------------------------------|
+| ADMIN   | Acceso total al sistema        |
+| USER    | Acceso a operaciones básicas   |
+| INVITED | Solo lectura de resúmenes      |
+
+### Matriz de Permisos
 
 | EndPoint           | ADMIN | USER | INVITED |
 | ------------------ | ----- | ---- | ------- |
@@ -70,8 +128,22 @@ Para ejecutar el proyecto:
 | Delete Sale     |  ✅   |      |         |
 | Login           |       |      |         |
 
+## Contribución 🤝
+1. Fork el proyecto
+2. Crear rama para feature (`git checkout -b feature/AmazingFeature`)
+3. Commit cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir Pull Request
+
 ## Autor 👨‍💻
+- **BrhayanLS** - [GitHub](https://github.com/BrhayanLS)
 
-- [@BrhayanLS](https://github.com/BrhayanLS)
+## Licencia 📄
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
 
-¡Gracias por utilizar AdGan para gestionar tu ganadería! Si tienes alguna pregunta o sugerencia, no dudes en ponerte en contacto con el autor.
+## Contacto 📧
+- GitHub: [@BrhayanLS](https://github.com/BrhayanLS)
+- Email: [Tu email]
+
+---
+⭐️ Si te gusta el proyecto, no olvides darle una estrella en GitHub

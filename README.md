@@ -143,7 +143,7 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.m
 
 ## Contacto 📧
 - GitHub: [@BrhayanLS](https://github.com/BrhayanLS)
-- Email: [Tu email]
+- Email: [brhayanls10@gmail.com]
 
 ---
 ⭐️ Si te gusta el proyecto, no olvides darle una estrella en GitHub

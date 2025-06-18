@@ -1,13 +1,15 @@
 #!/bin/sh
 
-# Set the JDBC URL (replace with your actual connection details)
-JDBC_URL="jdbc:mysql://dbmysql:3306/adgan"  # Adjust useSSL as needed
+# Esperar a que la base de datos esté lista
+echo "Esperando a que la base de datos esté lista..."
+while ! nc -z db 3306; do
+  sleep 1
+done
+echo "Base de datos lista!"
 
-# Wait for the MySQL database to be ready
-while ! nc -z dbmysql:3306; do sleep 1; done
+# Configurar la URL de la base de datos
+export SPRING_DATASOURCE_URL="jdbc:mysql://db:3306/adgan?createDatabaseIfNotExist=true"
 
-# Set environment variable for Hibernate (optional, but recommended)
-export DATABASE_URL="$JDBC_URL"
-
-# Start the API
-exec java -jar /app-service/adgan.jar
+# Iniciar la aplicación
+echo "Iniciando la aplicación Spring Boot..."
+exec java -jar app.jar

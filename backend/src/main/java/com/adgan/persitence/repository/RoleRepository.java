@@ -16,7 +16,7 @@ import java.util.Optional;
  * @version 1.0
  * @since 2024
  */
-public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
+public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
     /**
      * Busca un rol por su ID.
      * Mantiene el tipo de retorno Optional para manejar casos donde el rol no existe.

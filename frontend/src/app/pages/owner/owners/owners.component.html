@@ -50,7 +50,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="addCattleModalLabel">Añadir nuevo ganado</h1>
+        <h1 class="modal-title fs-5" id="addCattleModalLabel">Añadir nuevo usuario</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -171,7 +171,7 @@
           </div>
           <div class="mb-3">
           <label for="exampleFormControlInputU7" class="form-label" id="exampleFormControlInputU7">Seleccione un rol</label>
-          <select class="form-control" formControlName="roles" aria-label="Default select example">
+          <select class="form-control" formControlName="role" aria-label="Default select example">
             @for (rol of enumRoles; track $index) {
               <option value="{{ rol.value }}">{{ rol.roles }}</option>
             }

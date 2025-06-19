@@ -96,7 +96,7 @@ export class OwnersComponent implements OnInit {
         $("#addCattleModal").modal('hide')
       },
       error: (error) => {
-        console.log("Error al actualizar el registro");
+        console.log("Error al guardar el registro");
       }
     });
   }
@@ -119,7 +119,11 @@ export class OwnersComponent implements OnInit {
       this.ownerUpdate = data;
       console.log(data);
       this.ownerUpdate.password = '';
-      this.ownerUpdateForm.patchValue(this.ownerUpdate);
+      const formData = {
+        ...this.ownerUpdate,
+        role: this.ownerUpdate.roleId
+      };
+      this.ownerUpdateForm.patchValue(formData);
     });
   }
 

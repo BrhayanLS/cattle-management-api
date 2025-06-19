@@ -127,12 +127,14 @@ public class OwnerService {
     public OwnerEntity saveOwner(OwnerDTO owner) {
         RoleEntity role = null;
         boolean estado = true;
+        
         if (owner.getRoleId() != null) {
             Optional<RoleEntity> optionalRole = this.roleRepository.findById(owner.getRoleId());
             if (optionalRole.isPresent()) {
                 role = optionalRole.get();
             }
         }
+        
         if ((owner.getIdOwner() != null) && (exists(owner.getIdOwner()))) {
             Optional<OwnerEntity> exist = this.ownerRepository.findById(owner.getIdOwner());
             estado = exist.get().getEstado();

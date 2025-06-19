@@ -5,5 +5,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
-CMD ["npm", "start"]
+
+# Exponer el puerto 4200
+EXPOSE 4200
+
+# Configurar el comando para que Angular escuche en todas las interfaces
+CMD ["npm", "run", "start:docker"]

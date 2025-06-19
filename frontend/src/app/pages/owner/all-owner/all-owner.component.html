@@ -99,9 +99,9 @@
             </div>
             <div class="mb-3">
             <label for="exampleFormControlInputU7" class="form-label" id="exampleFormControlInputU7">Seleccione un rol</label>
-            <select class="form-control" formControlName="roles" aria-label="Default select example">
+            <select class="form-control" formControlName="role" aria-label="Default select example">
               @for (rol of enumRoles; track $index) {
-                <option value="{{ rol.roles }}">{{ rol.roles }}</option>
+                <option value="{{ rol.value }}">{{ rol.roles }}</option>
               }
             </select>
             @if (hasErrorsU('role', 'required')) { <span class="text-danger">Selecciona un rol</span> }

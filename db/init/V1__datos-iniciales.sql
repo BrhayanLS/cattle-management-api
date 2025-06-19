@@ -59,32 +59,26 @@ select `c`.`id_cattle` AS `idCattle`,`c`.`estado` AS `estado`,`c`.`nombre` AS `n
 from (`cattle` `c`
 	left join `owner` `o` on((`c`.`id_owner` = `o`.`id_owner`)));
 
-
+-- Vista para mostrar los animales en la finca
 DROP VIEW IF EXISTS `view_cattles`;
 CREATE VIEW `view_cattles` AS
-select `c`.`id_cattle` AS `idCattle`,`c`.`estado` AS `estado`,`c`.`nombre` AS `nombre`,`c`.`fecha_nacimiento` AS `fechaNacimiento`,
+	select `c`.`id_cattle` AS `idCattle`,`c`.`estado` AS `estado`,`c`.`nombre` AS `nombre`,`c`.`fecha_nacimiento` AS `fechaNacimiento`,
 	`c`.`id_owner` AS `idOwner`,`o`.`nombre` AS `nombreOwner`,`o`.`apellido` AS `apellido`,`o`.`contacto` AS `contacto`,`o`.`correo` AS `correo`
 from (`cattle` `c`
 	left join `owner` `o` on((`c`.`id_owner` = `o`.`id_owner`)))
-where (`c`.`estado` = 1);
+	where (`c`.`estado` = 1);
 
 -- Datos iniciales
--- Insertar datos de los dueños
-INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Admin', '1', 'Admin', '314568', 'Admin@mail.com', 'Admin', '$2a$10$a3.0mUzYTrFNV3fwxlE4MOJtvV5LrpwYMViC9ZjhXbKhKt3vZv1py');
-INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`) VALUES ('User', '1', 'User', '314320', 'User@mail.com', 'User', '$2a$10$a3.0mUzYTrFNV3fwxlE4MOJtvV5LrpwYMViC9ZjhXbKhKt3vZv1py');
-INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Invited', '1', 'Invited', '316458', 'Invited@mail.com', 'Invited', '$2a$10$a3.0mUzYTrFNV3fwxlE4MOJtvV5LrpwYMViC9ZjhXbKhKt3vZv1py');
-INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`) VALUES ('Invited', '1', 'Invited', '3116487', 'Invited@mail.com', 'Invited', '$2a$10$a3.0mUzYTrFNV3fwxlE4MOJtvV5LrpwYMViC9ZjhXbKhKt3vZv1py');
-
--- Insertar datos de los roles
+-- Insertar datos de los roles primero
 INSERT INTO `adgan`.`roles` (`name`) VALUES ('ADMIN');
 INSERT INTO `adgan`.`roles` (`name`) VALUES ('USER');
 INSERT INTO `adgan`.`roles` (`name`) VALUES ('INVITED');
 
--- Relacionar los roles con los dueños
-INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('1', '1');
-INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('2', '2');
-INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('3', '3');
-INSERT INTO `adgan`.`owner_roles` (`owner_id`, `role_id`) VALUES ('4', '4');
+-- Insertar datos de los dueños con role_id
+INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`, `role_id`) VALUES ('Admin', '1', 'Admin', '314568', 'Admin@mail.com', 'Admin', '$2a$10$a3.0mUzYTrFNV3fwxlE4MOJtvV5LrpwYMViC9ZjhXbKhKt3vZv1py', '1');
+INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`, `role_id`) VALUES ('User', '1', 'User', '314320', 'User@mail.com', 'User', '$2a$10$a3.0mUzYTrFNV3fwxlE4MOJtvV5LrpwYMViC9ZjhXbKhKt3vZv1py', '2');
+INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`, `role_id`) VALUES ('Invited', '1', 'Invited', '316458', 'Invited@mail.com', 'Invited', '$2a$10$a3.0mUzYTrFNV3fwxlE4MOJtvV5LrpwYMViC9ZjhXbKhKt3vZv1py', '3');
+INSERT INTO `adgan`.`owner` (`apellido`, `estado`, `username`, `contacto`, `correo`, `nombre`, `password`, `role_id`) VALUES ('Invited2', '1', 'Invited2', '3116487', 'Invited2@mail.com', 'Invited2', '$2a$10$a3.0mUzYTrFNV3fwxlE4MOJtvV5LrpwYMViC9ZjhXbKhKt3vZv1py', '3');
 
 -- Insertar datos de los animales
 INSERT INTO `adgan`.`cattle` (`estado`, `fecha_nacimiento`, `id_owner`, `nombre`) VALUES ('0', '2022-04-21', '1', 'Shack');

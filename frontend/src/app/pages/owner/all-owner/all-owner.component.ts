@@ -68,7 +68,7 @@ export class AllOwnerComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(3)]],
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      roles: ['', [Validators.required]]
+      role: ['', [Validators.required]]
     });
   }
 
@@ -89,7 +89,11 @@ export class AllOwnerComponent implements OnInit {
     this._apiService.getOwner(id).subscribe((data: any) => {
       this.ownerUpdate = data;
       this.ownerUpdate.password = '';
-      this.ownerUpdateForm.patchValue(this.ownerUpdate);
+      const formData = {
+        ...this.ownerUpdate,
+        role: this.ownerUpdate.roleId
+      };
+      this.ownerUpdateForm.patchValue(formData);
     });
   }
 
@@ -104,7 +108,7 @@ export class AllOwnerComponent implements OnInit {
       username: this.ownerUpdateForm.value.username,
       nombre: this.ownerUpdateForm.value.nombre,
       password: this.ownerUpdateForm.value.password,
-      roleId: this.ownerUpdateForm.value.roles,
+      roleId: this.ownerUpdateForm.value.role,
     };
     this._apiService.updateOwner(owner).subscribe({
       next: (response) => {

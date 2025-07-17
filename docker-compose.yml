@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: db
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_DATABASE=adgan
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    container_name: backend
+    image: backend-adgan
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/adgan?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db-init:
+    container_name: db-init
+    image: mysql:8.0
+    depends_on:
+      backend:
+        condition: service_started
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_DATABASE=adgan
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_HOST=db
+    command: >
+      sh -c "
+        chmod +x /docker-entrypoint-initdb.d/init-data.sh
+        /docker-entrypoint-initdb.d/init-data.sh
+      "
+
+  frontend:
+    container_name: frontend
+    image: frontend-adgan
+    build: ./frontend/
+    ports:
+      - 4200:4200
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - db-init

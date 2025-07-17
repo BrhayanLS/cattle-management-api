@@ -1,0 +1,37 @@
+@if (loading) {
+  <app-loading/>
+}
+  
+  @if (!loading) {
+    <section class="section-table">
+      <div class="container">
+        <h3>Resumen ganado vendido</h3>
+          <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Edad Venta</th>
+              <th scope="col">Fecha Venta</th>
+              <th scope="col">Dueño</th>
+              <th scope="col">Peso</th>
+              <th scope="col">Total$</th>
+            </tr>
+          </thead>
+          <tbody>
+              @for (cattle of listCattles; track $index) {
+                  <tr>
+                    <th scope="row">{{ cattle.idCattle }}</th>
+                    <td>{{ cattle.nombre }}</td>
+                    <td>{{ cattle.edad }}</td>
+                    <td>{{ cattle.fechaVenta }}</td>
+                    <td>{{ cattle.owner }}</td>
+                    <td>{{ cattle.peso }}</td>
+                    <td>{{ cattle.totalNeto | currency: '' : 'symbol' : '3.0-0' }}</td>
+                  </tr>
+              }
+          </tbody>
+        </table>
+  </div>
+  </section>
+  }

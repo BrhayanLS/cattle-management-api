@@ -17,7 +17,6 @@ import java.util.List;
  *
  * @author BrhayanLS
  * @version 1.0
- * @since 2024
  */
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController

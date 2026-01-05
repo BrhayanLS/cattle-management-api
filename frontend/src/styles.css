@@ -1,93 +1,290 @@
-/*----------------------------------Estilos de las tablas--------------------------------*/
+/* -------------------------------------------------------------------------- */
+/*                         AGROTECH PREMIUM DESIGN SYSTEM                         */
+/* -------------------------------------------------------------------------- */
 
-.section-table {
-    font-family: poppins;
-    background: rgb(53,104,45);
-    background: linear-gradient(90deg, rgba(53,104,45,1) 50%, rgba(38,69,34,1) 100%);
-    padding: 10px 0px;
-    min-height: 100vh;
-  }
+:root {
+    /* Brand Colors */
+    --color-brand-primary: #1B4D3E;
+    /* Deep Forest */
+    --color-brand-secondary: #4CAF50;
+    /* Meadow Green */
+    --color-brand-hover: #3e8e41;
+    --color-accent: #D4A017;
+    /* Golden Wheat */
 
-  .section-table h3 {
-    color: #c3fcb6;
-  }
-  
-  .section-table .table {
-    text-align: center;
-    --bs-table-color: #fff;
-    --bs-table-bg: transparent;
-    --bs-table-hover-color: #31d413;
-    border-style: dashed;
-  }
-  
-  .section-table .table > tr {
-    border: 1px dashed #f2feef;
-  }
+    /* State Colors */
+    --color-success: #2E7D32;
+    --color-warning: #ED6C02;
+    --color-danger: #C0392B;
+    /* Terra Cotta */
+    --color-info: #0288D1;
 
-  /*--------------------------------------Estilo de los iconos--------------------------------*/
+    /* Neutrals */
+    --color-bg-body: #F8F9FA;
+    /* Soft Cream */
+    --color-bg-surface: #FFFFFF;
+    --color-text-main: #2C3E50;
+    /* Dark Charcoal */
+    --color-text-muted: #64748B;
+    --color-border: #E2E8F0;
 
-  .icon {
-    width: 1.7em;
-    height: 1.7em;
-    cursor: pointer;
-  }
-  
-  .icon:hover {
-    opacity: 0.8;
-    border: 1px solid #31d413;
-    border-radius: 10%;
-  }
-  
-/*-------------------------------------Estilos botones----------------------------------------*/
+    /* Shadows & Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-.btn {
-    font-size: 1.1em;
+    /* Typography */
+    --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/*--------------------------------------Estilo modales-----------------------------------------*/
+/* -------------------------------------------------------------------------- */
+/*                                BASE RESETS                                 */
+/* -------------------------------------------------------------------------- */
 
-.modal-content {
-    --bs-modal-bg: #f2feef;
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--color-bg-body);
+    color: var(--color-text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
-.modal-content h1, .modal-content label {
-    color: #17590e;
-    font-weight: bold;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    color: var(--color-brand-primary);
+    margin-bottom: 1rem;
 }
 
-.modal-content input {
-    border-color: #1d6c0f;
+a {
+    text-decoration: none;
 }
 
-.modal-content input:hover {
-    border: 2px solid #17590e;
+/* -------------------------------------------------------------------------- */
+/*                               ACCESSIBILITY                                */
+/* -------------------------------------------------------------------------- */
+
+/* Global Focus Ring for Keyboard Navigation */
+:focus-visible {
+    outline: 2px solid var(--color-brand-secondary);
+    outline-offset: 2px;
 }
 
-/*------------------------------------------Estilos detail-----------------------------------------*/
+/* -------------------------------------------------------------------------- */
+/*                                 COMPONENTS                                 */
+/* -------------------------------------------------------------------------- */
 
-.container-detail {
-    display: flex;
-    justify-content: center;
-}
-
+/* Cards */
 .card {
-    background: #e0ffd9;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.card-text {
-    margin: 0;
+/* Tables - Modern DataGrid Style */
+.table-container {
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 1px solid var(--color-border);
 }
-  
 
+.table {
+    width: 100%;
+    margin-bottom: 0;
+    color: var(--color-text-main);
+    vertical-align: middle;
+}
 
-  /*--deep-fir-50: #f2feef;
---deep-fir-100: #e0ffd9;
---deep-fir-200: #c3fcb6;
---deep-fir-300: #92f87d;
---deep-fir-400: #59eb3d;
---deep-fir-500: #31d413;
---deep-fir-600: #23b009;
---deep-fir-700: #1e8a0b;
---deep-fir-800: #1d6c0f;
---deep-fir-900: #17590e;
---deep-fir-950: #052501;*/
+.table thead {
+    background-color: #F1F5F9;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.table thead th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    padding: 1rem;
+    border: none;
+}
+
+.table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.9rem;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #F8FAFC;
+}
+
+/* Section Table */
+.section-table {
+    padding: 2rem 0;
+}
+
+.section-table h3 {
+    color: var(--color-brand-primary);
+    margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+    font-weight: 500;
+    padding: 0.625rem 1.25rem;
+    /* Increased for better touch target */
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    /* WCAG Touch Target */
+}
+
+.btn-primary {
+    background-color: var(--color-brand-primary);
+    border-color: var(--color-brand-primary);
+}
+
+.btn-primary:hover {
+    background-color: #143d30;
+    border-color: #143d30;
+}
+
+.btn-outline-primary {
+    color: var(--color-brand-primary);
+    border-color: var(--color-brand-primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--color-brand-primary);
+    color: white;
+}
+
+/* Icons in Tables */
+.action-icon {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0.5rem;
+    /* Increased padding for clickability */
+    border-radius: 4px;
+}
+
+.action-icon:hover {
+    background-color: #F1F5F9;
+    color: var(--color-brand-primary);
+}
+
+.action-icon.delete:hover {
+    color: var(--color-danger);
+    background-color: #fef2f2;
+}
+
+/* Modals */
+.modal-content {
+    border: none;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.modal-header {
+    background-color: var(--color-brand-primary);
+    color: white;
+    border-bottom: none;
+}
+
+.modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.modal-title {
+    color: white;
+    font-weight: 600;
+}
+
+.form-control:focus {
+    border-color: var(--color-brand-secondary);
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
+
+/* Badges - Soft Colors */
+.badge-soft-success {
+    background-color: #E8F5E9;
+    color: #1B5E20;
+}
+
+.badge-soft-secondary {
+    background-color: #F1F5F9;
+    color: #475569;
+}
+
+.badge-soft-danger {
+    background-color: #FEF2F2;
+    color: #B91C1C;
+}
+
+.badge-soft-warning {
+    background-color: #FFF8E1;
+    color: #B06000;
+}
+
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+}
+
+/* Dashboard Gradients */
+.primary-gradient {
+    background: linear-gradient(135deg, var(--color-brand-primary), #1a4435);
+}
+
+.success-gradient {
+    background: linear-gradient(135deg, var(--color-brand-secondary), #388E3C);
+}
+
+.warning-gradient {
+    background: linear-gradient(135deg, #F57C00, #E65100);
+}
+
+/* Layout Helper */
+.main-content-wrapper {
+    margin-left: 260px;
+    /* Width of sidebar */
+    min-height: 100vh;
+    background-color: var(--color-bg-body);
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content-wrapper.collapsed {
+    margin-left: 80px;
+}
+
+@media (max-width: 768px) {
+    .main-content-wrapper {
+        margin-left: 0;
+        padding-top: 80px;
+        /* Space for mobile header if added */
+    }
+}

@@ -3,30 +3,31 @@ import { IAllCattle } from '../../../models/cattle.model';
 import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
 import { LoadingComponent } from '../../../loading/loading.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-not-available',
   standalone: true,
-  imports: [LoadingComponent],
+  imports: [LoadingComponent, NgClass],
   templateUrl: './not-available.component.html',
   styleUrl: './not-available.component.css'
 })
 export class NotAvailableComponent implements OnInit {
 
-  loading:boolean = true;
+  loading: boolean = true;
   listCattles: IAllCattle[] = [];
 
   private _apiService = inject(ApiService);
   private _router = inject(Router);
 
   ngOnInit(): void {
-      this._apiService.getNotAvailable().subscribe((data:IAllCattle[]) => {
-        this.listCattles = data;
-        this.loading = false;
-      })
+    this._apiService.getNotAvailable().subscribe((data: IAllCattle[]) => {
+      this.listCattles = data;
+      this.loading = false;
+    })
   }
 
   navegate(id: number): void {
-    this._router.navigate(['cattle',id]);
+    this._router.navigate(['cattle', id]);
   }
 }

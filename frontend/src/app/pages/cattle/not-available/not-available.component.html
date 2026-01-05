@@ -1,43 +1,60 @@
 @if (loading) {
 <app-loading />
-}
-
-@if (!loading) {
-  <section class="section-table">
-    <div class="container">
+} @else {
+<section class="section-table">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
       <h3>Listado de ganado no disponible</h3>
-        <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Fecha Nacimiento</th>
-          <th scope="col">Nombre Dueño</th>
-          <th scope="col">Apellido Dueño</th>
-          <th scope="col">Correo</th>
-          <th scope="col">Contacto</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (cattle of listCattles; track $index) {
-        <tr>
-          <th scope="row">{{ cattle.idCattle }}</th>
-          <td>{{ cattle.estado }}</td>
-          <td>{{ cattle.nombre }}</td>
-          <td>{{ cattle.fechaNacimiento }}</td>
-          <td>{{ cattle.nombreOwner }}</td>
-          <td>{{ cattle.apellido }}</td>
-          <td>{{ cattle.correo }}</td>
-          <td>{{ cattle.contacto }}</td>
-          <td>
-            <img src="../../../../assets/icons/detalle.png" alt="Detalle" class="icon mx-1" (click)="navegate(cattle.idCattle)">
-          </td> 
-        </tr>
-        }
-      </tbody>
-    </table>
+    </div>
+
+    <div class="table-container">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th scope="col" class="ps-4">Id</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha Nacimiento</th>
+            <th scope="col">Dueño</th>
+            <th scope="col">Contacto</th>
+            <th scope="col" class="text-end pe-4">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cattle of listCattles; track $index) {
+          <tr>
+            <th scope="row" class="ps-4 text-muted">#{{ cattle.idCattle }}</th>
+            <td>
+              <span class="badge rounded-pill badge-soft-danger">
+                {{ cattle.estado }}
+              </span>
+            </td>
+            <td class="fw-medium text-dark">{{ cattle.nombre }}</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <span class="material-symbols-rounded fs-6 text-muted">calendar_today</span>
+                {{ cattle.fechaNacimiento }}
+              </div>
+            </td>
+            <td>
+              <div class="d-flex flex-column">
+                <span class="fw-medium">{{ cattle.nombreOwner }} {{ cattle.apellido }}</span>
+                <small class="text-muted">{{ cattle.correo }}</small>
+              </div>
+            </td>
+            <td>{{ cattle.contacto }}</td>
+            <td class="text-end pe-4">
+              <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1"
+                (click)="navegate(cattle.idCattle)" title="Ver detalles">
+                <span class="material-symbols-rounded fs-6">visibility</span>
+                Ver Detalle
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 }

@@ -1,0 +1,122 @@
+<form [formGroup]="ownerForm" (ngSubmit)="onSubmit()" class="row g-3">
+
+    <!-- Nombre -->
+    <div class="col-md-6">
+        <label for="nombre" class="form-label">Nombre</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">person</span>
+            </span>
+            <input type="text" class="form-control border-start-0 ps-0" id="nombre" formControlName="nombre"
+                placeholder="Ej: Andrés"
+                [ngClass]="{'is-invalid': hasError('nombre', 'required') || hasError('nombre', 'minlength')}">
+        </div>
+        @if (hasError('nombre', 'required')) { <div class="text-danger small mt-1">El nombre es requerido.</div> }
+        @if (hasError('nombre', 'minlength')) { <div class="text-danger small mt-1">Mínimo 3 caracteres.</div> }
+    </div>
+
+    <!-- Apellido -->
+    <div class="col-md-6">
+        <label for="apellido" class="form-label">Apellido</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">group</span>
+            </span>
+            <input type="text" class="form-control border-start-0 ps-0" id="apellido" formControlName="apellido"
+                placeholder="Ej: Perez"
+                [ngClass]="{'is-invalid': hasError('apellido', 'required') || hasError('apellido', 'minlength')}">
+        </div>
+        @if (hasError('apellido', 'required')) { <div class="text-danger small mt-1">El apellido es requerido.</div> }
+        @if (hasError('apellido', 'minlength')) { <div class="text-danger small mt-1">Mínimo 3 caracteres.</div> }
+    </div>
+
+    <!-- Username -->
+    <div class="col-md-6">
+        <label for="username" class="form-label">Usuario</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">account_circle</span>
+            </span>
+            <input type="text" class="form-control border-start-0 ps-0" id="username" formControlName="username"
+                placeholder="Ej: andres_p"
+                [ngClass]="{'is-invalid': hasError('username', 'required') || hasError('username', 'minlength')}">
+        </div>
+        @if (hasError('username', 'required')) { <div class="text-danger small mt-1">El username es requerido.</div> }
+        @if (hasError('username', 'minlength')) { <div class="text-danger small mt-1">Mínimo 3 caracteres.</div> }
+    </div>
+
+    <!-- Correo -->
+    <div class="col-md-6">
+        <label for="correo" class="form-label">Correo Electrónico</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">mail</span>
+            </span>
+            <input type="email" class="form-control border-start-0 ps-0" id="correo" formControlName="correo"
+                placeholder="ejemplo@mail.com"
+                [ngClass]="{'is-invalid': hasError('correo', 'required') || hasError('correo', 'email')}">
+        </div>
+        @if (hasError('correo', 'required')) { <div class="text-danger small mt-1">El correo es requerido.</div> }
+        @if (hasError('correo', 'email')) { <div class="text-danger small mt-1">Formato de correo inválido.</div> }
+    </div>
+
+    <!-- Contacto -->
+    <div class="col-md-6">
+        <label for="contacto" class="form-label">Contacto (Celular)</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">call</span>
+            </span>
+            <input type="text" class="form-control border-start-0 ps-0" id="contacto" formControlName="contacto"
+                placeholder="3112223333"
+                [ngClass]="{'is-invalid': hasError('contacto', 'required') || hasError('contacto', 'minlength') || hasError('contacto', 'pattern')}">
+        </div>
+        @if (hasError('contacto', 'required')) { <div class="text-danger small mt-1">El contacto es requerido.</div> }
+        @if (hasError('contacto', 'minlength')) { <div class="text-danger small mt-1">Mínimo 10 dígitos.</div> }
+        @if (hasError('contacto', 'pattern')) { <div class="text-danger small mt-1">Solo números.</div> }
+    </div>
+
+    <!-- Rol -->
+    <div class="col-md-6">
+        <label for="role" class="form-label">Rol</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">badge</span>
+            </span>
+            <select class="form-select border-start-0 ps-0" id="role" formControlName="role"
+                [ngClass]="{'is-invalid': hasError('role', 'required')}">
+                <option value="" disabled selected>Seleccione un rol</option>
+                @for (rol of enumRoles; track $index) {
+                <option [value]="rol.value">{{ rol.roles }}</option>
+                }
+            </select>
+        </div>
+        @if (hasError('role', 'required')) { <div class="text-danger small mt-1">Seleccione un rol.</div> }
+    </div>
+
+    <!-- Contraseña -->
+    <div class="col-12">
+        <label for="password" class="form-label">Contraseña</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">lock</span>
+            </span>
+            <input type="password" class="form-control border-start-0 ps-0" id="password" formControlName="password"
+                [placeholder]="ownerData ? 'Dejar en blanco para mantener actual' : 'Mínimo 8 caracteres'"
+                [ngClass]="{'is-invalid': hasError('password', 'required') || hasError('password', 'minlength')}">
+        </div>
+        @if (hasError('password', 'required')) { <div class="text-danger small mt-1">La contraseña es requerida.</div> }
+        @if (hasError('password', 'minlength')) { <div class="text-danger small mt-1">Mínimo 8 caracteres.</div> }
+    </div>
+
+    <!-- Botones -->
+    <div class="col-12 d-flex justify-content-end gap-2 mt-4">
+        <button type="button" class="btn btn-outline-secondary" (click)="onCancel.emit()">
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary px-4">
+            {{ ownerData ? 'Actualizar' : 'Guardar' }}
+        </button>
+    </div>
+
+</form>

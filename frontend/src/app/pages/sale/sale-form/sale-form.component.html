@@ -1,0 +1,116 @@
+<form [formGroup]="saleForm" (ngSubmit)="onSubmit()" class="row g-3">
+
+    <!-- General Info Section -->
+    <div class="col-12">
+        <h6 class="text-primary border-bottom pb-2 mb-3">Información General</h6>
+    </div>
+
+    <!-- Fecha -->
+    <div class="col-md-6">
+        <label for="fechaVenta" class="form-label">Fecha de Venta</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">calendar_today</span>
+            </span>
+            <input type="date" class="form-control border-start-0 ps-0" id="fechaVenta" formControlName="fechaVenta"
+                [ngClass]="{'is-invalid': hasError('fechaVenta', 'required')}">
+        </div>
+        @if (hasError('fechaVenta', 'required')) { <div class="text-danger small mt-1">La fecha es requerida.</div> }
+    </div>
+
+    <!-- Precio Kilo -->
+    <div class="col-md-6">
+        <label for="precioKilo" class="form-label">Precio por Kilo ($)</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">attach_money</span>
+            </span>
+            <input type="number" class="form-control border-start-0 ps-0" id="precioKilo" formControlName="precioKilo"
+                placeholder="Ej: 8000"
+                [ngClass]="{'is-invalid': hasError('precioKilo', 'required') || hasError('precioKilo', 'min')}">
+        </div>
+        @if (hasError('precioKilo', 'required')) { <div class="text-danger small mt-1">Requerido.</div> }
+    </div>
+
+    <!-- Valor Camion -->
+    <div class="col-md-6">
+        <label for="valorCamion" class="form-label">Valor Camión ($)</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">local_shipping</span>
+            </span>
+            <input type="number" class="form-control border-start-0 ps-0" id="valorCamion" formControlName="valorCamion"
+                placeholder="0"
+                [ngClass]="{'is-invalid': hasError('valorCamion', 'required') || hasError('valorCamion', 'min')}">
+        </div>
+    </div>
+
+    <!-- Valor Bascula -->
+    <div class="col-md-6">
+        <label for="valorBascula" class="form-label">Valor Báscula ($)</label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <span class="material-symbols-rounded fs-5 text-muted">monitor_weight</span>
+            </span>
+            <input type="number" class="form-control border-start-0 ps-0" id="valorBascula"
+                formControlName="valorBascula" placeholder="0"
+                [ngClass]="{'is-invalid': hasError('valorBascula', 'required') || hasError('valorBascula', 'min')}">
+        </div>
+    </div>
+
+    <!-- Cattle List Section -->
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+            <h6 class="text-primary mb-0">Listado de Ganado</h6>
+            <button type="button" class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
+                (click)="addCattle()">
+                <span class="material-symbols-rounded fs-6">add</span>
+                Agregar Animal
+            </button>
+        </div>
+
+        <div formArrayName="saleCattles">
+            @for (item of saleCattles.controls; track $index) {
+            <div [formGroupName]="$index" class="card mb-2 border bg-light">
+                <div class="card-body p-2">
+                    <div class="row g-2 align-items-center">
+                        <div class="col-5">
+                            <label class="form-label small text-muted mb-1">ID Animal</label>
+                            <input type="number" class="form-control form-control-sm" formControlName="cattleId"
+                                placeholder="ID" [ngClass]="{'is-invalid': hasError('cattleId', 'required', item) }">
+                        </div>
+                        <div class="col-5">
+                            <label class="form-label small text-muted mb-1">Peso (Kg)</label>
+                            <input type="number" class="form-control form-control-sm" formControlName="peso"
+                                placeholder="Kg" [ngClass]="{'is-invalid': hasError('peso', 'required', item) }">
+                        </div>
+                        <div class="col-2 text-end pt-3">
+                            <button type="button" class="btn btn-sm btn-outline-danger border-0"
+                                (click)="removeCattle($index)" title="Quitar">
+                                <span class="material-symbols-rounded">close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+            @if (saleCattles.controls.length === 0) {
+            <div class="text-center py-4 text-muted border rounded border-dashed bg-white">
+                <span class="material-symbols-rounded fs-1 d-block mb-2 text-secondary opacity-50">cow_off</span>
+                <p class="mb-0 small">No hay animales agregados a esta venta.</p>
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="col-12 d-flex justify-content-end gap-2 mt-4 border-top pt-3">
+        <button type="button" class="btn btn-outline-secondary" (click)="onCancel.emit()">
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary px-4">
+            {{ saleData ? 'Actualizar Venta' : 'Registrar Venta' }}
+        </button>
+    </div>
+
+</form>

@@ -1,25 +1,89 @@
 @if (loading) {
-    <app-loading/>
-  }
-  
-  @if (!loading) {
-      <section class="section-table">
-          <div class="container-detail">
-          <div class="card">
-              <div class="card-body">
-                <h5 class="card-title"><b>Nombre Completo: </b>{{ owner?.nombre }} {{ owner?.apellido }}</h5>
-                <!--<p class="card-text">
-                    @for (owner of owner?.roles; track $index) {
-                        <b>Rol: </b>{{ owner.name }}
-                    }
-                  </p>-->
-                <p class="card-text"> {{ owner?.role?.name }}</p>
-                <p class="card-text"><b>Username:</b> {{ owner?.username }}</p>
-                <p class="card-text"><b>Estado: </b>@if (owner?.estado) {Activo} @else {Inactivo}</p>
-                <p class="card-text"><b>Correo: </b>{{ owner?.correo }}</p>
-                <p class="card-text"><b>Celular: </b>{{ owner?.contacto }}</p>
+<app-loading />
+} @else {
+<section class="section-detail py-4">
+  <div class="container">
+
+    <!-- Header / Breadcrumb / Back -->
+    <div class="d-flex align-items-center mb-4 gap-3">
+      <a routerLink="/owners"
+        class="btn btn-outline-secondary d-flex align-items-center justify-content-center p-2 rounded-circle"
+        style="width: 40px; height: 40px;">
+        <span class="material-symbols-rounded">arrow_back</span>
+      </a>
+      <h2 class="mb-0 fw-bold text-dark">Detalle del Ganadero</h2>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Main Info Card -->
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm overflow-hidden h-100">
+          <div class="card-header bg-primary text-white p-4">
+            <div class="d-flex align-items-center gap-3">
+              <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 64px; height: 64px;">
+                <span class="material-symbols-rounded fs-1">person</span>
+              </div>
+              <div>
+                <h3 class="mb-1 text-white">{{ owner?.nombre }} {{ owner?.apellido }}</h3>
+                <p class="mb-0 text-white-50">@{{ owner?.username }}</p>
+              </div>
+              <div class="ms-auto text-end">
+                <span class="badge bg-white text-primary fs-6 px-3 py-2 rounded-pill shadow-sm">
+                  {{ owner?.role?.name }}
+                </span>
               </div>
             </div>
           </div>
-      </section>
-  }
+
+          <div class="card-body p-4">
+            <div class="row g-4">
+
+              <!-- Status -->
+              <div class="col-md-6">
+                <div class="p-3 rounded bg-light border d-flex align-items-center gap-3 h-100">
+                  <span class="material-symbols-rounded text-muted fs-3">verified</span>
+                  <div>
+                    <small class="text-muted d-block text-uppercase fw-bold" style="font-size: 0.75rem;">Estado de
+                      Cuenta</small>
+                    <span class="badge rounded-pill mt-1" [ngClass]="owner?.estado ? 'bg-success' : 'bg-danger'">
+                      {{ owner?.estado ? 'Activo' : 'Inactivo' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Contact Info -->
+              <div class="col-md-6">
+                <div class="p-3 rounded bg-light border d-flex align-items-center gap-3 h-100">
+                  <span class="material-symbols-rounded text-muted fs-3">contact_phone</span>
+                  <div>
+                    <small class="text-muted d-block text-uppercase fw-bold"
+                      style="font-size: 0.75rem;">Contacto</small>
+                    <div class="fw-medium text-dark">{{ owner?.contacto }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="col-12">
+                <div class="p-3 rounded bg-light border d-flex align-items-center gap-3">
+                  <span class="material-symbols-rounded text-muted fs-3">mail</span>
+                  <div>
+                    <small class="text-muted d-block text-uppercase fw-bold" style="font-size: 0.75rem;">Correo
+                      Electrónico</small>
+                    <div class="fw-medium text-dark">{{ owner?.correo }}</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar / Additional Stats/Actions could go here -->
+    </div>
+  </div>
+</section>
+}

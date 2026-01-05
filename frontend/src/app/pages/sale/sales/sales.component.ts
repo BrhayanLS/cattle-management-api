@@ -1,15 +1,14 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { LoadingComponent } from '../../../loading/loading.component';
-import { CommonModule, CurrencyPipe, NgClass } from '@angular/common';
-import { IAllSale, ISale, SaveSaleCattle } from '../../../models/sale.model';
+import { IAllSale } from '../../../models/sale.model';
 import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CurrencyPipe, DatePipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-sales',
   standalone: true,
-  imports: [LoadingComponent, CurrencyPipe],
+  imports: [LoadingComponent, CurrencyPipe, DatePipe, NgClass],
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.css'
 })
@@ -25,13 +24,10 @@ export class SalesComponent implements OnInit {
     this._apiService.getSales().subscribe((data: IAllSale[]) => {
       this.listSale = data;
       this.loading = false;
-    })
-
-    //this.loadForm();
+    });
   }
 
   navegate(id: number): void {
     this._router.navigate(['sale', id]);
   }
-
 }

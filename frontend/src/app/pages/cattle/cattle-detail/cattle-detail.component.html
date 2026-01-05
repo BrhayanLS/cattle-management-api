@@ -1,20 +1,102 @@
 @if (loading) {
-  <app-loading/>
-}
+<app-loading />
+} @else {
+<div class="container py-4 fade-in">
+  <!-- Header / Nav -->
+  <div class="d-flex align-items-center mb-4">
+    <button class="btn btn-outline-secondary d-flex align-items-center gap-2" (click)="goBack()">
+      <span class="material-symbols-rounded">arrow_back</span>
+      Volver
+    </button>
+    <h2 class="ms-3 mb-0 fw-bold text-dark">Detalle del Animal</h2>
+  </div>
 
-@if (!loading) {
-    <section class="section-table">
-        <div class="container-detail">
-        <div class="card" style="width: 18rem;">
-          <img src="../../../../assets/images/ejm-card.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title"><b>Nombre: </b>{{ cattle?.nombre }}</h5>
-              <p class="card-text"><b>Fecha de nacimiento: </b>{{ cattle?.fechaNacimiento }}</p>
-              <p class="card-text"><b>Nombre dueño: </b>{{ cattle?.nombreOwner }} {{ cattle?.apellido }}</p>
-              <p class="card-text"><b>Correo: </b>{{ cattle?.correo }}</p>
-              <p class="card-text"><b>Celular: </b>{{ cattle?.contacto }}</p>
+  <!-- Main Card -->
+  <div class="card border-0 shadow-lg overflow-hidden">
+    <div class="row g-0">
+
+      <!-- Column 1: Visual / Image -->
+      <div class="col-md-4 bg-light d-flex align-items-center justify-content-center p-5 position-relative">
+        <!-- Status Badge (Floating) -->
+        <span class="badge position-absolute top-0 start-0 m-3 fs-6 rounded-pill shadow-sm"
+          [ngClass]="cattle?.estado === 1 ? 'badge-soft-success' : 'badge-soft-secondary'">
+          {{ cattle?.estado === 1 ? 'Activo' : 'Inactivo' }}
+        </span>
+
+        <!-- Placeholder Icon (Replaces static image for now, much cleaner) -->
+        <div class="text-center text-muted opacity-50">
+          <span class="material-symbols-rounded" style="font-size: 8rem;">pets</span>
+          <p class="mt-2 text-uppercase fw-semibold small letter-spacing-1">Sin fotografía</p>
+        </div>
+      </div>
+
+      <!-- Column 2: Information -->
+      <div class="col-md-8">
+        <div class="card-body p-4 p-lg-5">
+
+          <div class="d-flex justify-content-between align-items-start mb-4">
+            <div>
+              <small class="text-muted text-uppercase fw-bold tracking-wide">Identificación</small>
+              <h1 class="card-title fw-bold text-primary display-6 mb-0">{{ cattle?.nombre }}</h1>
+              <p class="text-muted mb-0">ID: #{{ cattle?.idCattle }}</p>
             </div>
           </div>
+
+          <hr class="my-4 opacity-10">
+
+          <div class="row g-4">
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-box bg-light text-primary rounded-circle p-2">
+                  <span class="material-symbols-rounded">calendar_today</span>
+                </div>
+                <div>
+                  <h6 class="mb-0 text-muted small">Fecha de Nacimiento</h6>
+                  <p class="mb-0 fw-medium">{{ cattle?.fechaNacimiento }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-box bg-light text-primary rounded-circle p-2">
+                  <span class="material-symbols-rounded">person</span>
+                </div>
+                <div>
+                  <h6 class="mb-0 text-muted small">Dueño</h6>
+                  <p class="mb-0 fw-medium">{{ cattle?.nombreOwner }} {{ cattle?.apellido }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-box bg-light text-primary rounded-circle p-2">
+                  <span class="material-symbols-rounded">email</span>
+                </div>
+                <div>
+                  <h6 class="mb-0 text-muted small">Correo Electrónico</h6>
+                  <p class="mb-0 fw-medium">{{ cattle?.correo }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-box bg-light text-primary rounded-circle p-2">
+                  <span class="material-symbols-rounded">call</span>
+                </div>
+                <div>
+                  <h6 class="mb-0 text-muted small">Contacto</h6>
+                  <p class="mb-0 fw-medium">{{ cattle?.contacto }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</div>
 }

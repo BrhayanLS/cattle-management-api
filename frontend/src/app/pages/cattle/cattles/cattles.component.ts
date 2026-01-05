@@ -1,23 +1,27 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { IAllCattle, ICattle } from '../../../models/cattle.model';
+import { IAllCattle } from '../../../models/cattle.model';
 import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
 import { LoadingComponent } from '../../../loading/loading.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-declare var $: any;
+import { ModalComponent } from '../../../shared/modal/modal.component';
+import { CattleFormComponent } from '../cattle-form/cattle-form.component';
 
 @Component({
   selector: 'app-cattles',
   standalone: true,
-  imports: [LoadingComponent, ReactiveFormsModule, NgClass],
+  imports: [LoadingComponent, NgClass, ModalComponent, CattleFormComponent],
   templateUrl: './cattles.component.html',
   styleUrl: './cattles.component.css'
 })
-export class CattlesComponent {
+export class CattlesComponent implements OnInit {
 
   loading: boolean = true;
   listCattles: IAllCattle[] = [];
+
+  // Modal State
+  isModalOpen = false;
+  modalTitle = 'Añadir nuevo animal';
 
   private _apiService = inject(ApiService);
   private _router = inject(Router);
@@ -30,45 +34,24 @@ export class CattlesComponent {
     this._apiService.getCattles().subscribe((data: IAllCattle[]) => {
       this.listCattles = data;
       this.loading = false;
-    })
+    });
   }
 
   navegate(id: number): void {
     this._router.navigate(['cattle', id])
   }
 
-  cattleForm!: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) {
-    this.cattleForm = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-      nacimiento: ['', [Validators.required, Validators.minLength(10)]],
-      owner: ['', [Validators.required, Validators.minLength(1)]]
-    })
+  openModal(): void {
+    this.isModalOpen = true;
+    this.modalTitle = 'Añadir nuevo animal';
   }
 
-  enviar(event: Event) {
-    event.preventDefault();
-
-    const cattle: ICattle = {
-      nombre: this.cattleForm.value.nombre,
-      fechaNacimiento: this.cattleForm.value.nacimiento,
-      idOwner: this.cattleForm.value.owner
-    };
-
-    this._apiService.addCattle(cattle).subscribe({
-      next: (response) => {
-        console.log("Registro creado correctamente");
-        this.obtenerCattle();
-        $("#exampleModal").modal('hide')
-      },
-      error: (error) => {
-        console.log("Error al crear el registro");
-      }
-    });
+  closeModal(): void {
+    this.isModalOpen = false;
   }
 
-  hasErrors(field: string, typeError: string) {
-    return this.cattleForm.get(field)?.hasError(typeError) && this.cattleForm.get(field)?.touched;
+  handleSave() {
+    this.closeModal();
+    this.obtenerCattle();
   }
 }

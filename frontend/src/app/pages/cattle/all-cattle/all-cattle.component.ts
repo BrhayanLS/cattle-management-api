@@ -1,16 +1,25 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { IAllCattle, ICattle } from '../../../models/cattle.model';
+import { IAllCattle } from '../../../models/cattle.model';
 import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
 import { LoadingComponent } from '../../../loading/loading.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-declare var $: any;
+import { ModalComponent } from '../../../shared/modal/modal.component';
+import { CattleFormComponent } from '../cattle-form/cattle-form.component';
+import { DropdownDirective } from '../../../shared/directives/dropdown.directive';
+import { ConfirmationModalComponent } from '../../../shared/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-all-cattle',
   standalone: true,
-  imports: [LoadingComponent, ReactiveFormsModule, NgClass],
+  imports: [
+    LoadingComponent,
+    NgClass,
+    ModalComponent,
+    CattleFormComponent,
+    DropdownDirective,
+    ConfirmationModalComponent
+  ],
   templateUrl: './all-cattle.component.html',
   styleUrl: './all-cattle.component.css'
 })
@@ -18,6 +27,15 @@ export class AllCattleComponent implements OnInit {
 
   loading: boolean = true;
   listCattles: IAllCattle[] = [];
+
+  // Modal State
+  isModalOpen = false;
+  modalTitle = 'Añadir nuevo animal';
+  selectedCattleId: number | null = null;
+
+  // Confirmation Modal State
+  isConfirmModalOpen = false;
+  cattleToDeleteId: number | null = null;
 
   private _apiService = inject(ApiService);
   private _router = inject(Router);
@@ -38,67 +56,42 @@ export class AllCattleComponent implements OnInit {
   }
 
   deleteCattle(id: number): void {
-    if (confirm('¿Estás seguro de eliminar este animal?')) {
-      this._apiService.deleteCattle(id);
+    this.cattleToDeleteId = id;
+    this.isConfirmModalOpen = true;
+  }
+
+  confirmDelete(): void {
+    if (this.cattleToDeleteId) {
+      this._apiService.deleteCattle(this.cattleToDeleteId).subscribe(() => {
+        this.obtenerCattle();
+        this.closeConfirmModal();
+      });
     }
   }
 
-  /*--------------------------------------------------------------------------------------------------*/
-
-  cattleUpdate: IAllCattle = {
-    idCattle: 0,
-    idOwner: 0,
-    apellido: '',
-    correo: '',
-    contacto: '',
-    nombre: '',
-    estado: 0,
-    fechaNacimiento: new Date(1, 0, 1),
-    nombreOwner: '',
-  };
-
-  cattleForm!: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) {
-    this.cattleForm = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-      fechaNacimiento: ['', [Validators.required, Validators.minLength(10)]],
-      idOwner: ['', [Validators.required, Validators.minLength(1)]]
-    });
+  closeConfirmModal(): void {
+    this.isConfirmModalOpen = false;
+    this.cattleToDeleteId = null;
   }
 
-  loadCattle(id: number): void {
-    this._apiService.getCattle(id).subscribe((data: any) => {
-      this.cattleUpdate = data;
-      this.cattleForm.patchValue(this.cattleUpdate);
-    });
+  openModal(id?: number): void {
+    this.isModalOpen = true;
+    if (id) {
+      this.selectedCattleId = id;
+      this.modalTitle = 'Actualizar animal';
+    } else {
+      this.selectedCattleId = null;
+      this.modalTitle = 'Añadir nuevo animal';
+    }
   }
 
-  enviar(event: Event) {
-    event.preventDefault();
-  
-    const cattle: ICattle = {
-      idCattle: this.cattleUpdate?.idCattle,
-      nombre: this.cattleForm.value.nombre,
-      fechaNacimiento: this.cattleForm.value.fechaNacimiento,
-      idOwner: this.cattleForm.value.idOwner
-    };
-
-    this._apiService.updateCattle(cattle).subscribe({
-      next: (response) => {
-        console.log("Registro actualizado correctamente");
-        this.obtenerCattle();
-        $("#exampleModal").modal('hide')
-      },
-      error: (error) => {
-        console.log("Error al actualizar el registro");
-      }
-    });
-  }
-  
-
-  hasErrors(field: string, typeError: string) {
-    return this.cattleForm.get(field)?.hasError(typeError) && this.cattleForm.get(field)?.touched;
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.selectedCattleId = null;
   }
 
+  handleSave() {
+    this.closeModal();
+    this.obtenerCattle();
+  }
 }

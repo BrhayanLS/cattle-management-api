@@ -1,0 +1,8 @@
+/* Custom styles for dashed border placeholder */
+.border-dashed {
+    border-style: dashed !important;
+}
+
+.material-symbols-rounded {
+    vertical-align: middle;
+}

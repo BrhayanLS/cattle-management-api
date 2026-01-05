@@ -1,40 +1,58 @@
 @if (loading) {
-  <app-loading/>
-}
-  
-  @if (!loading) {
-    <section class="section-table">
-      <div class="container">
-        <h3>Resumen del ganado</h3>
-          <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Edad</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Dueño</th>
-              <th scope="col">Contacto</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-              @for (cattle of listCattles; track $index) {
-                  <tr>
-                  <th scope="row">{{ cattle.idCattle }}</th>
-                  <td>{{ cattle.nombre }}</td>
-                  <td>{{ cattle.edad }}</td>
-                  <td>{{ cattle.estado }}</td>
-                  <td>{{ cattle.owner }}</td>
-                  <td>{{ cattle.contacto }}</td>
-                  <td>
-                    <img src="../../../../assets/icons/detalle.png" alt="Detalle" class="icon mx-1" (click)="navegate(cattle.idCattle)">
-                  </td>
-                  
-                  </tr>
-              }
-          </tbody>
-        </table>
+<app-loading />
+} @else {
+<section class="section-table">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3>Resumen del ganado</h3>
+    </div>
+
+    <div class="table-container">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th scope="col" class="ps-4">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Dueño</th>
+            <th scope="col">Contacto</th>
+            <th scope="col" class="text-end pe-4">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cattle of listCattles; track $index) {
+          <tr>
+            <th scope="row" class="ps-4 text-muted">#{{ cattle.idCattle }}</th>
+            <td class="fw-medium text-dark">{{ cattle.nombre }}</td>
+            <td>{{ cattle.edad }}</td>
+            <td>
+              <span class="badge rounded-pill" [ngClass]="{
+                    'badge-soft-success': cattle.estado === 'Activo',
+                    'badge-soft-secondary': cattle.estado !== 'Activo'
+                  }">
+                {{ cattle.estado }}
+              </span>
+            </td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <span class="material-symbols-rounded fs-6 text-muted">person</span>
+                {{ cattle.owner }}
+              </div>
+            </td>
+            <td>{{ cattle.contacto }}</td>
+            <td class="text-end pe-4">
+              <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1"
+                (click)="navegate(cattle.idCattle)" title="Ver detalles">
+                <span class="material-symbols-rounded fs-6">visibility</span>
+                Ver Detalle
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
-  </section>
-  }
+</section>
+}

@@ -3,11 +3,12 @@ import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
 import { IResumeCattle } from '../../../models/cattle.model';
 import { LoadingComponent } from '../../../loading/loading.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-resume',
   standalone: true,
-  imports: [LoadingComponent],
+  imports: [LoadingComponent, NgClass],
   templateUrl: './resume.component.html',
   styleUrl: './resume.component.css'
 })
@@ -20,13 +21,13 @@ export class ResumeComponent implements OnInit {
   private _router = inject(Router);
 
   ngOnInit(): void {
-      this._apiService.getResume().subscribe((data: IResumeCattle[]) => {
-        this.listCattles = data;
-        this.loading = false;
-      })
+    this._apiService.getResume().subscribe((data: IResumeCattle[]) => {
+      this.listCattles = data;
+      this.loading = false;
+    })
   }
 
   navegate(id: number): void {
-    this._router.navigate(['cattle',id])
+    this._router.navigate(['cattle', id])
   }
 }

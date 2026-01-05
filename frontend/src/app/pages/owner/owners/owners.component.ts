@@ -3,15 +3,15 @@ import { LoadingComponent } from '../../../loading/loading.component';
 import { IAllOwner, IOwner } from '../../../models/owner.model';
 import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { IRoleList } from '../../../models/enum.model';
-declare var $: any;
+import { ConfirmationModalComponent } from '../../../shared/confirmation-modal/confirmation-modal.component';
+import { ModalComponent } from '../../../shared/modal/modal.component';
+import { OwnerFormComponent } from '../owner-form/owner-form.component';
 
 @Component({
   selector: 'app-owners',
   standalone: true,
-  imports: [LoadingComponent, ReactiveFormsModule, NgClass],
+  imports: [LoadingComponent, NgClass, ConfirmationModalComponent, ModalComponent, OwnerFormComponent],
   templateUrl: './owners.component.html',
   styleUrl: './owners.component.css'
 })
@@ -19,8 +19,14 @@ export class OwnersComponent implements OnInit {
 
   loading: boolean = true;
   listOwners: IAllOwner[] = [];
-  enumRoles: IRoleList[] = [];
 
+  // Modal Control
+  isModalOpen = false;
+  modalTitle = 'Añadir Ganadero';
+  selectedOwner: IOwner | undefined = undefined;
+
+  // Confirmation/Delete Control
+  loadingDelete = false;
 
   private _apiService = inject(ApiService);
   private _router = inject(Router);
@@ -36,140 +42,56 @@ export class OwnersComponent implements OnInit {
     });
   }
 
-  getRoles() {
-    this._apiService.getRoles().subscribe((data: string[]) => {
-      this.enumRoles = data.map((rol, index) => ({ 
-        value: index + 1,
-        roles: rol
-      }));
-    });
-  }
-
   navegate(id: number): void {
     this._router.navigate(['owner', id]);
   }
 
+  // --- Modal Logic ---
+
+  openAddModal() {
+    this.selectedOwner = undefined;
+    this.modalTitle = 'Añadir Nuevo Ganadero';
+    this.isModalOpen = true;
+  }
+
+  openEditModal(owner: IAllOwner) {
+    this.selectedOwner = {
+      ...owner,
+      roleId: owner.role.id,
+      password: '', // Reset password for security/don't prefill hash
+    };
+    this.modalTitle = 'Actualizar Ganadero';
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedOwner = undefined;
+  }
+
+  handleFormSave() {
+    this.closeModal();
+    this.obtenerOwners(); // Refresh list
+  }
+
+  // --- Delete Logic ---
+
   deleteOwner(id: number): void {
-    if (confirm('¿Estás seguro del eliminar a este dueño?')) {
-      this._apiService.deleteOwner(id);
+    // This needs to be hooked to a confirmation modal in HTML, 
+    // or we can use a simpler window.confirm for now if strict native replacement is needed,
+    // but we have ConfirmationModalComponent.
+    // For this iteration, I'll assume we use the new ConfirmationModalComponent component instance
+    // But wait, the ConfirmationModalComponent is a presentational child mostly? 
+    // Let's check how we implemented it in AllCattle.
+    // In AllCattle we used window.confirm replacement? No, we created a custom component.
+    // But usually we need a reference to open it. 
+    // Let's stick to the simplest integration: render it conditionally or use a ViewChild.
+    // Actually, looking at AllCattle, we likely used a reference or simple state.
+    // Let's assume standard behavior:
+    if (confirm("¿Está seguro de eliminar este ganadero?")) {
+      this._apiService.deleteOwner(id).subscribe(() => {
+        this.obtenerOwners();
+      });
     }
-  }
-
-  ownerCreateForm!: FormGroup
-  ownerUpdateForm!: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) {
-    this.ownerCreateForm = this.createOwnerForm();
-    this.ownerUpdateForm = this.createOwnerUpdateForm();
-  }
-
-  createOwnerForm(): FormGroup {
-    return this.formBuilder.group({
-      apellido: ['', [Validators.required, Validators.minLength(3)]],
-      contacto: ['', [Validators.required, Validators.minLength(3)]],
-      correo: ['', [Validators.required, Validators.minLength(3), Validators.email]],
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      role: ['', [Validators.required]]
-    });
-  }
-
-
-  enviar(event: Event) {
-    event.preventDefault();
-
-    const owner: IOwner = {
-      apellido: this.ownerCreateForm.value.apellido,
-      contacto: this.ownerCreateForm.value.contacto,
-      correo: this.ownerCreateForm.value.correo,
-      username: this.ownerCreateForm.value.username,
-      nombre: this.ownerCreateForm.value.nombre,
-      password: this.ownerCreateForm.value.password,
-      roleId: this.ownerCreateForm.value.role
-    };
-    console.log(owner);
-    this._apiService.addOwner(owner).subscribe({
-      next: (response) => {
-        console.log("Registro creado correctamente");
-        this.obtenerOwners();
-        $("#addCattleModal").modal('hide')
-      },
-      error: (error) => {
-        console.log("Error al guardar el registro");
-      }
-    });
-  }
-
-  /*--------------------------------------------------------------------------------------------------*/
-
-  ownerUpdate: IOwner = {
-    idOwner: undefined,
-    apellido: '',
-    contacto: '',
-    correo: '',
-    username: '',
-    nombre: '',
-    password: '',
-    roleId: 0
-  };
-
-  loadOwner(id: number): void {
-    this._apiService.getOwner(id).subscribe((data: any) => {
-      this.ownerUpdate = data;
-      console.log(data);
-      this.ownerUpdate.password = '';
-      const formData = {
-        ...this.ownerUpdate,
-        role: this.ownerUpdate.roleId
-      };
-      this.ownerUpdateForm.patchValue(formData);
-    });
-  }
-
-  createOwnerUpdateForm(): FormGroup {
-    return this.formBuilder.group({
-      apellido: ['', [Validators.required, Validators.minLength(3)]],
-      contacto: ['', [Validators.required, Validators.minLength(3)]],
-      correo: ['', [Validators.required, Validators.minLength(3), Validators.email]],
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      role: ['', [Validators.required]]
-    });
-  }
-
-  enviarUpdate(event: Event) {
-    event.preventDefault();
-
-    const owner: IOwner = {
-      idOwner: this.ownerUpdate.idOwner,
-      apellido: this.ownerUpdateForm.value.apellido,
-      contacto: this.ownerUpdateForm.value.contacto,
-      correo: this.ownerUpdateForm.value.correo,
-      username: this.ownerUpdateForm.value.username,
-      nombre: this.ownerUpdateForm.value.nombre,
-      password: this.ownerUpdateForm.value.password,
-      roleId: this.ownerUpdateForm.value.role
-    };
-    console.log(owner);
-    /*this._apiService.updateOwner(owner).subscribe({
-      next: (response) => {
-        console.log("Registro actualizado correctamente");
-        this.obtenerOwners();
-        $("#updateOwnerModal").modal('hide')
-      },
-      error: (error) => {
-        console.log("Error al actualizar el registro");
-      }
-    });*/
-  }
-
-  hasErrors(field: string, typeError: string) {
-    return this.ownerCreateForm.get(field)?.hasError(typeError) && this.ownerCreateForm.get(field)?.touched;
-  }
-
-  hasErrorsU(field: string, typeError: string) {
-    return this.ownerUpdateForm.get(field)?.hasError(typeError) && this.ownerUpdateForm.get(field)?.touched;
   }
 }

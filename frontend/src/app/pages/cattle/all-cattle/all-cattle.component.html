@@ -1,85 +1,88 @@
 @if (loading) {
-  <app-loading/>
+<app-loading />
 }
 
 @if (!loading) {
-  <section class="section-table">
-    <div class="container">
-      <h3>Listado de todo el ganado</h3>
-        <table class="table table-hover">
+<section class="section-table">
+  <div class="container">
+    <h3>Listado de todo el ganado</h3>
+
+    <div class="table-container">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Estado</th>
             <th scope="col">Nombre</th>
             <th scope="col">Fecha Nacimiento</th>
-            <th scope="col">Nombre Dueño</th>
-            <th scope="col">Apellido Dueño</th>
-            <th scope="col">Correo</th>
+            <th scope="col">Dueño</th>
             <th scope="col">Contacto</th>
-            <th scope="col">Acciones</th>
+            <th scope="col" class="text-end">Acciones</th>
           </tr>
         </thead>
         <tbody>
-            @for (cattle of listCattles; track $index) {
-                <tr>
-                <th scope="row">{{ cattle.idCattle }}</th>
-                <td>{{ cattle.estado }}</td>
-                <td>{{ cattle.nombre }}</td>
-                <td>{{ cattle.fechaNacimiento }}</td>
-                <td>{{ cattle.nombreOwner }}</td>
-                <td>{{ cattle.apellido }}</td>
-                <td>{{ cattle.correo }}</td>
-                <td>{{ cattle.contacto }}</td>
-                <td>
-                  <img src="../../../../assets/icons/detalle.png" alt="Detalle" class="icon mx-1" (click)="navegate(cattle.idCattle)">
-                  <img src="../../../../assets/icons/editar.png" alt="Actualizar" class="icon mx-1" (click)="loadCattle(cattle.idCattle)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                   <img src="../../../../assets/icons/eliminar.png" alt="Eliminar" class="icon mx-1" (click)="deleteCattle(cattle.idCattle)">
-                 </td> 
-                </tr>
-            }
+          @for (cattle of listCattles; track $index) {
+          <tr>
+            <th scope="row">{{ cattle.idCattle }}</th>
+            <td>
+              <span class="badge rounded-pill" [ngClass]="{
+                       'badge-soft-success': cattle.estado === 1, 
+                       'badge-soft-secondary': cattle.estado !== 1
+                     }">
+                {{ cattle.estado === 1 ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td>{{ cattle.nombre }}</td>
+            <td>{{ cattle.fechaNacimiento }}</td>
+            <td>
+              <div>{{ cattle.nombreOwner }} {{ cattle.apellido }}</div>
+              <small class="text-muted">{{ cattle.correo }}</small>
+            </td>
+            <td>{{ cattle.contacto }}</td>
+            <td class="text-end">
+            <td class="text-end">
+              <div class="dropdown" appDropdown #dropdown="appDropdown">
+                <button class="btn btn-link link-dark p-0 text-decoration-none" type="button"
+                  (click)="dropdown.toggle()" aria-label="Más acciones" [attr.aria-expanded]="dropdown.isOpen">
+                  <span class="material-symbols-rounded">more_vert</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" [class.show]="dropdown.isOpen">
+                  <li><button class="dropdown-item d-flex align-items-center gap-2" (click)="navegate(cattle.idCattle)">
+                      <span class="material-symbols-rounded fs-6">visibility</span> Ver detalle
+                    </button></li>
+                  <li><button class="dropdown-item d-flex align-items-center gap-2"
+                      (click)="openModal(cattle.idCattle)">
+                      <span class="material-symbols-rounded fs-6">edit</span> Editar
+                    </button></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><button class="dropdown-item d-flex align-items-center gap-2 text-danger"
+                      (click)="deleteCattle(cattle.idCattle)">
+                      <span class="material-symbols-rounded fs-6">delete</span> Eliminar
+                    </button></li>
+                </ul>
+              </div>
+            </td>
+            </td>
+          </tr>
+          }
         </tbody>
       </table>
-</div>
+    </div>
+  </div>
 </section>
 }
 
-<!--Modal para actualizar-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir nuevo animal</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="cattleForm" class="row g-3 needs-Validation" novalidate (submit)="enviar($event)">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="nombre"
-            [ngClass]="{'is-invalid' : hasErrors('nombre', 'required') || hasErrors('nombre','minlength')}">
-            @if (hasErrors('nombre', 'required')) { <span class="text-danger">Complete el campo</span> }
-            @if (hasErrors('nombre', 'minlength')) { <span class="text-danger">El nombre debe tener al menos 3 caracteres</span> }
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput2" class="form-label">Fecha de nacimiento</label>
-            <input type="date" class="form-control" id="exampleFormControlInput2" formControlName="fechaNacimiento"
-            [ngClass]="{'is-invalid' : hasErrors('fechaNacimiento', 'required') || hasErrors('fechaNacimiento','minlength')}">
-            @if (hasErrors('fechaNacimiento', 'required')) { <span class="text-danger">Complete el campo</span> }
-            @if (hasErrors('fechaNacimiento', 'minlength')) { <span class="text-danger">La fecha debe tener al menos 10 caracteres</span> }
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput3" class="form-label">Id Dueño</label>
-            <input type="number" class="form-control" id="exampleFormControlInput3" formControlName="idOwner"
-            [ngClass]="{'is-invalid' : hasErrors('idOwner', 'required') || hasErrors('idOwner','minlength')}">
-            @if (hasErrors('idOwner', 'required')) { <span class="text-danger">Complete el campo</span> }
-            @if (hasErrors('idOwner', 'minlength')) { <span class="text-danger">El id debe tener al menos 1 caracteres</span> }
-          </div>
-          <div class="col-12">
-            <button class="btn btn-outline-primary" type="submit">Actualizar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+<app-modal [isOpen]="isModalOpen" [title]="modalTitle" (close)="closeModal()">
+  @if (isModalOpen) {
+  <app-cattle-form [idCattle]="selectedCattleId" (onSave)="handleSave()" (onCancel)="closeModal()">
+  </app-cattle-form>
+  }
+</app-modal>
+
+<app-confirmation-modal [isOpen]="isConfirmModalOpen" title="Eliminar Animal"
+  message="¿Estás seguro de que deseas eliminar este animal?" subMessage="Esta acción no se puede deshacer."
+  confirmText="Sí, eliminar" cancelText="Cancelar" type="danger" (confirm)="confirmDelete()"
+  (cancel)="closeConfirmModal()">
+</app-confirmation-modal>

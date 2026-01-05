@@ -1,36 +1,57 @@
 @if (loading) {
 <app-loading />
-}
-
-@if (!loading) {
-  <section class="section-table">
-    <div class="container">
+} @else {
+<section class="section-table">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
       <h3>Listado de ventas</h3>
-        <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Fecha Venta</th>
-          <th scope="col">Precio/Kilo</th>
-          <th scope="col">Valor Camion</th>
-          <th scope="col">Valor Bascula</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (sale of listSale; track $index) {
-        <tr>
-          <th scope="row">{{ sale.idSale }}</th>
-          <td>{{ sale.fechaVenta }}</td>
-          <td>{{ sale.precioKilo | currency: '' : 'symbol' : '3.0-0' }}</td>
-          <td>{{ sale.valorCamion | currency: '' : 'symbol' : '3.0-0' }}</td>
-          <td>{{ sale.valorBascula | currency: '' : 'symbol' : '3.0-0' }}</td>
-          <td>
-            <img src="../../../../assets/icons/detalle.png" alt="Detalle" class="icon mx-1" (click)="navegate(sale.idSale)">
-        </tr>
-        }
-      </tbody>
-    </table>
+    </div>
+
+    <div class="table-container">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th scope="col" class="ps-4">Id</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Precios/Costos</th>
+            <th scope="col" class="text-end pe-4">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (sale of listSale; track $index) {
+          <tr>
+            <th scope="row" class="ps-4 text-muted">#{{ sale.idSale }}</th>
+            <td>
+              <span class="badge rounded-pill" [ngClass]="sale.estado ? 'badge-soft-success' : 'badge-soft-danger'">
+                {{ sale.estado ? 'Disponible' : 'No Disponible' }}
+              </span>
+            </td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <span class="material-symbols-rounded text-muted fs-5">calendar_today</span>
+                {{ sale.fechaVenta | date:'dd/MM/yyyy' }}
+              </div>
+            </td>
+            <td>
+              <div class="d-flex flex-column small">
+                <div><b>Precio Kg:</b> {{ sale.precioKilo | currency: 'USD' : 'symbol' : '1.0-0' }}</div>
+                <div class="text-muted">Descuentos: {{ (sale.valorCamion + sale.valorBascula) | currency: 'USD' :
+                  'symbol' : '1.0-0' }}</div>
+              </div>
+            </td>
+            <td class="text-end pe-4">
+              <button
+                class="btn btn-sm btn-outline-secondary d-flex align-items-center justify-content-center p-1 d-inline-flex"
+                (click)="navegate(sale.idSale)" title="Ver Detalles">
+                <span class="material-symbols-rounded fs-5">visibility</span>
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 }

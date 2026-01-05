@@ -1,0 +1,11 @@
+/* Allow dropdowns to overflow the table container */
+.table-container {
+    overflow: visible;
+}
+
+/* Ensure the last column dropdowns align correctly */
+.dropdown-menu {
+    border: 1px solid var(--color-border);
+    margin-top: 0.5rem;
+    box-shadow: var(--shadow-lg) !important;
+}

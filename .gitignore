@@ -1,0 +1,46 @@
+# ============================================================
+# .gitignore — cattle-management-api
+# Creado en Plan 00 (reorganización de ramas).
+# El Plan 01 (saneamiento base) puede ampliar/refinar este archivo.
+# ============================================================
+
+# --- Documentación local de planeación (NO se commitea) ---
+docs/planeacion/
+
+# --- Java / Maven / Spring Boot ---
+target/
+build/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.mvn/wrapper/maven-wrapper.jar
+HELP.md
+
+# --- Node / Angular / TypeScript ---
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+yarn-error.log*
+*.tsbuildinfo
+
+# --- IDE ---
+.idea/
+*.iml
+.vscode/
+*.swp
+.project
+.classpath
+.settings/
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Entorno / secretos ---
+.env
+.env.local
+*.env.local
